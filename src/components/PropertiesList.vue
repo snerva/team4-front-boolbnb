@@ -33,6 +33,14 @@ export default {
           this.loading = false;
         });
     },
+    prevPage(url) {
+      console.log(url)
+      this.getProperties(url)
+    },
+    nextPage(url) {
+      console.log(url)
+      this.getProperties(url)
+    }
   },
   mounted() {
     this.getProperties(this.state.api_url + "/api/properties");
@@ -69,54 +77,51 @@ export default {
                 </div>
                 <h4 class="card-title">{{ property.title }}</h4>
                 <p class="card-text">{{ property.address }}</p>
-                <!-- <p class="card-text">{{ property.latitude }} {{ property.longitude }}</p> -->
                 <p class="card-text text-orange">{{ property.price }} &euro;</p>
-                <!-- <template v-if="property.description">
-                  <p class="card-text">
-                    {{ property.description }}
-                  </p>
-                  <router-link :to="{
-                    name: 'single-property',
-                    params: { slug: property.slug },
-                  }" class="nav-link text-orange">Read more <font-awesome-icon icon="fa-solid fa-arrow-right" />
-                  </router-link>
-                </template>
-                <div v-else>No description for this project</div> -->
                 <div class="type my-3">
                   <strong class="text-orange" v-if="property.type">
                     {{ property.type.name }}
                   </strong>
                   <span v-else>no types yet</span>
                 </div>
-                <!-- <div class="amenities">
-                  <template v-if="property.amenities.length > 0">
-                    <span v-for="amenity in property.amenities">
-                      #{{ amenity.name }}
-                    </span>
-                  </template>
-                  <template v-else>
-                    <span>No Amenities yet!.</span>
-                  </template>
-                </div> -->
               </div>
             </div>
           </div>
         </div>
+
+        <nav class="d-flex justify-content-center pt-5" aria-label="Page navigation">
+          <ul class="pagination">
+            <li class="page-item" v-if="properties.prev_page_url" @click="prevPage(properties.prev_page_url)">
+              <a class="page-link" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+              </a>
+            </li>
+            <li class="page-item active" aria-current="page">
+              <a href="#" class="page-link">{{ properties.current_page }}</a>
+            </li>
+            <li class="page-item" v-if="properties.next_page_url" @click="nextPage(properties.next_page_url)">
+              <a class="page-link" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
       </template>
 
       <template v-else-if="loading">
-        <div class="loading">
-          Loading ...
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-            class="bi bi-hourglass-split" viewBox="0 0 16 16">
-            <path
-              d="M2.5 15a.5.5 0 1 1 0-1h1v-1a4.5 4.5 0 0 1 2.557-4.06c.29-.139.443-.377.443-.59v-.7c0-.213-.154-.451-.443-.59A4.5 4.5 0 0 1 3.5 3V2h-1a.5.5 0 0 1 0-1h11a.5.5 0 0 1 0 1h-1v1a4.5 4.5 0 0 1-2.557 4.06c-.29.139-.443.377-.443.59v.7c0 .213.154.451.443.59A4.5 4.5 0 0 1 12.5 13v1h1a.5.5 0 0 1 0 1h-11zm2-13v1c0 .537.12 1.045.337 1.5h6.326c.216-.455.337-.963.337-1.5V2h-7zm3 6.35c0 .701-.478 1.236-1.011 1.492A3.5 3.5 0 0 0 4.5 13s.866-1.299 3-1.48V8.35zm1 0v3.17c2.134.181 3 1.48 3 1.48a3.5 3.5 0 0 0-1.989-3.158C8.978 9.586 8.5 9.052 8.5 8.351z" />
-          </svg>
+        <div class="loading py-5 w-100 text-center">
+          <div class="loader py-5">
+            <img src="/images/loader.gif" class="img-fluid rounded-circle mb-4" style="max-height: 400px;" alt="">
+          </div>
         </div>
       </template>
-      <div v-else>
-        <p>No projects here</p>
-      </div>
+      <template v-else>
+        <div class="loading-fail py-5 mb-4 w-100 text-center">
+          <div class="no-file py-5" style="height: 500px">
+            <h1>No properties yet!</h1>
+          </div>
+        </div>
+      </template>
     </div>
   </section>
 </template>

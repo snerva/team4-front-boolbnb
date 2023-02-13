@@ -2,6 +2,14 @@ main {
     background-color: #ffffff;
 }
 
+.banner {
+    background-image: url(/images/banner.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+
+}
+
 .wrapper {
     height: 100vh;
     overflow-x: hidden;

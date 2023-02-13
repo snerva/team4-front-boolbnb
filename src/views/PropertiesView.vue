@@ -14,7 +14,11 @@ export default {
   <main>
     <div class="banner search-properties p-5">
       <div class="container p-5">
-        <h2 class="text-white">SEARCH ADVANCED BAR HERE</h2>
+        <div class="search-bar text-center py-5">
+          <strong class="text-white">
+            ...SEARCH ADVANCED BAR HERE
+          </strong>
+        </div>
       </div>
     </div>
     <PropertiesList></PropertiesList>
@@ -22,4 +26,6 @@ export default {
   <AppFooter></AppFooter>
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+
+</style>

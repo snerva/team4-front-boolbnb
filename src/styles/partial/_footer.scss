@@ -1,0 +1,17 @@
+footer {
+    font-size: 14px;
+    color: #ffffff;
+    background-color: #4e4c4b;
+
+    li {
+        border-bottom: 2px solid #ff8c3400;
+
+        &:hover {
+            border-bottom: 2px solid #ff8d34;
+        }
+    }
+
+    .footer-bottom {
+        background-color: #ff8d34;
+    }
+}

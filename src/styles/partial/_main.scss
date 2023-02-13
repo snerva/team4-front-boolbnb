@@ -1,0 +1,66 @@
+main {
+    background-color: #ffffff;
+    height: 100vh;
+}
+
+.wrapper {
+    height: 100vh;
+    overflow-x: hidden;
+    overflow-y: auto;
+    perspective: 300px;
+}
+
+.parallax_group {
+    position: relative;
+    height: 100vh;
+    width: 100vw;
+    transform-style: preserve-3d;
+}
+
+.parallax_layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.sky {
+    background: url('/images/sky.png') no-repeat center;
+    background-size: cover;
+    transform: translateZ(-600px) scale(3);
+    z-index: 1;
+}
+
+.text {
+    position: absolute;
+    left: 50%;
+    top: 60%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+
+    h1 {
+        font-family: "Poppins", sans-serif;
+        font-size: 76px;
+    }
+}
+
+.city {
+    background: url('/images/city.png') no-repeat center;
+    background-size: cover;
+    transform: translateZ(-400px) scale(2.33333333);
+    z-index: 3;
+}
+
+.scroll-down {
+    position: absolute;
+    top: 92%;
+    left: 50%;
+    z-index: 4;
+}
+
+.info-container {
+    background-color: #ffffff;
+    transform: translateZ(0) scale(1);
+    z-index: 1;
+}

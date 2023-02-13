@@ -1,0 +1,65 @@
+@use './partial/header.scss';
+@use './partial/main.scss';
+@use './partial/footer.scss';
+// Import all of Bootstrap's CSS
+@import "/node_modules/bootstrap/scss/bootstrap";
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Poppins", sans-serif;
+    color: #161616;
+}
+
+h1 {
+    font-family: "Marck Script", cursive;
+    font-size: 42px;
+}
+
+.bck-orange {
+    border: 2px solid #ff8d34;
+    color: #ff8d34;
+
+    &:hover {
+        color: #ffffff;
+        background-color: #ff8d34;
+    }
+}
+
+.text-orange {
+    color: #ff8d34;
+}
+
+.photo-zoom {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    object-position: center;
+    aspect-ratio: 1;
+    transform: scale(1);
+    cursor: pointer;
+    transition: all ease .5s;
+
+    &:hover {
+        transform: scale(1.15);
+    }
+
+}
+
+.pagination {
+    .page-item {
+        .page-link {
+            color: #ff8d34 !important;
+        }
+    }
+
+    .active>.page-link {
+        background-color: #ff8d34 !important;
+        border-color: #ff8d34 !important;
+        color: #ffffff !important;
+    }
+}

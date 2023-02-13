@@ -57,9 +57,20 @@ export default {
 
               </div>
               <div class="card-body">
+                <div class="icons d-flex justify-content-between mb-3">
+                  <h6 class="text-orange"><font-awesome-icon icon="fa-solid fa-door-open" /> {{
+                    property.rooms_num
+                  }}
+                  </h6>
+                  <h6 class="text-orange"><font-awesome-icon icon="fa-solid fa-bed" /> {{
+                    property.beds_num
+                  }}</h6>
+                  <h6 class="text-orange">{{ property.square_meters }} &#13217;</h6>
+                </div>
                 <h4 class="card-title">{{ property.title }}</h4>
                 <p class="card-text">{{ property.address }}</p>
-                <p class="card-text">{{ property.latitude }} {{ property.longitude }}</p>
+                <!-- <p class="card-text">{{ property.latitude }} {{ property.longitude }}</p> -->
+                <p class="card-text text-orange">{{ property.price }} &euro;</p>
                 <!-- <template v-if="property.description">
                   <p class="card-text">
                     {{ property.description }}
@@ -77,7 +88,7 @@ export default {
                   </strong>
                   <span v-else>no types yet</span>
                 </div>
-                <div class="technologies">
+                <!-- <div class="amenities">
                   <template v-if="property.amenities.length > 0">
                     <span v-for="amenity in property.amenities">
                       #{{ amenity.name }}
@@ -86,7 +97,7 @@ export default {
                   <template v-else>
                     <span>No Amenities yet!.</span>
                   </template>
-                </div>
+                </div> -->
               </div>
             </div>
           </div>

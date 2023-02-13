@@ -55,8 +55,7 @@ export default {
                         </div>
                         <div class="col">
                             <div class="img-gallery overflow-hidden">
-                                <img class="img-fluid photo-zoom"
-                                    :src="state.api_url + '/storage/app/public/' + property.image"
+                                <img class="img-fluid photo-zoom" :src="state.api_url + '/storage/' + property.image"
                                     :alt="property.title" />
                             </div>
                         </div>

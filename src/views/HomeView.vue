@@ -25,6 +25,11 @@ export default {
                         <div class="collapse navbar-collapse flex-md-grow-0" id="navbarSupportedContent">
                             <ul class="navbar-nav m-auto">
                                 <li class="nav-item pe-3">
+                                    <a href="#search" class="nav-link">
+                                        <font-awesome-icon icon="fa-solid fa-magnifying-glass" />
+                                    </a>
+                                </li>
+                                <li class="nav-item pe-3">
                                     <router-link active-class="active" class="nav-link" :to="{ name: 'properties' }">ALL
                                         PROPERTIES</router-link>
                                 </li>
@@ -58,7 +63,9 @@ export default {
                         :to="{ name: 'properties' }">VIEW ALL
                         PROPERTIES</router-link>
                 </div>
-                <div class="maps py-5"></div>
+                <div class="search py-5">
+                    <a name="search"></a>
+                </div>
             </div>
             <AppFooter></AppFooter>
         </div>

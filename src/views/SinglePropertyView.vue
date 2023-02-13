@@ -102,8 +102,11 @@ export default {
                             </div>
                         </div>
                         <div class="col">
-                            <div class="maps text-center">...CONTACT FORM</div>
+                            <div class="contact text-center">...CONTACT FORM</div>
                         </div>
+                    </div>
+                    <div class="maps">
+
                     </div>
                 </section>
             </template>

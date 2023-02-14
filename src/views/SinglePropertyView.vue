@@ -146,13 +146,13 @@ export default {
                             </div>
                         </div>
                         <div class="col">
-                            <div class="contact text-center">
+                            <div class="contact text-center p-5">
                                 <div v-if="success" class="alert alert-success text-start" role="alert">
                                     Messaggio inviato con successo!
                                 </div>
 
                                 <form @submit.prevent="SendForm()"
-                                    class="border shadow p-3 mb-5 bg-body-tertiary rounded">
+                                    class="border shadow p-3 mb-5 bg-body-tertiary rounded-3  border border-0">
 
                                     <div class="mb-3">
                                         <label for="" class="form-label">Name</label>
@@ -200,7 +200,7 @@ export default {
                                     </div>
 
 
-                                    <button type="submit" class="btn btn-primary" :disabled="loading">
+                                    <button type="submit" class="btn bck-orange rounded-pill" :disabled="loading">
                                         {{ loading? 'Sending...': 'Contact me' }}
                                     </button>
                                 </form>

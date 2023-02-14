@@ -143,12 +143,12 @@ export default {
         </div>
       </div>
 
-      <div class="yellow-jumbo">
 
 
-        <!--/.info-container-->
-        <AppFooter></AppFooter>
-      </div>
+
+      <!--/.info-container-->
+      <AppFooter></AppFooter>
+
     </div>
   </div>
 </template>

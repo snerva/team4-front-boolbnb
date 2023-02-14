@@ -48,7 +48,7 @@ export default {
             this.propertiesFound.forEach(ele => {
                 console.log(ele);
                 let popupOffset = 25;
-                let marker = new this.tt.Marker().setLngLat(ele)/* .addTo(this.map) */;
+                let marker = new this.tt.Marker().setLngLat(ele).addTo(this.map);
                 console.log(marker);
                 this.markers.push(marker);
                 let popup = new this.tt.Popup({ offset: popupOffset });
@@ -101,6 +101,6 @@ export default {
 #map {
     height: 100vh;
     width: 100% - 15px;
-    display: none;
+    /* display: none; */
 }
 </style>

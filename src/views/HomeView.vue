@@ -61,6 +61,12 @@ export default {
         })
         .catch(err => console.error(err));
     },
+    getImagePath(path) {
+      if (path) {
+        return this.state.api_url + "/storage/" + path;
+      }
+      return "/images/placeholder.png";
+    },
     created() {
       this.addressToSearch = this.firstQuery;
       this.geocoding();
@@ -129,13 +135,51 @@ export default {
         </div>
         <div class="search py-5">
           <div class="row row-cols-md-2">
-            <div class="search-bar">
-              <!-- ricerca indirizzo -->
-              <input type="text" placeholder="Dove vuoi andare?" v-model="addressToSearch"
-                class="w-100 mb-3 rounded-pill px-2 px-2" @keyup.enter="geocoding">
-              <div class="d-flex align-items-center justify-content-around py-1">
-                <SearchInMap class="sticky-top" ref="map" :center="[this.lng, this.lat]"
-                  :propertiesFound="this.propertiesCoordinates" />
+            <div class="col">
+              <div class="search-bar">
+                <!-- ricerca indirizzo -->
+                <input type="text" placeholder="Dove vuoi andare?" v-model="addressToSearch"
+                  class="w-100 mb-3 rounded-pill px-2 px-2" @keyup.enter="geocoding">
+                <div class="d-flex align-items-center justify-content-around py-1">
+                  <SearchInMap class="sticky-top" ref="map" :center="[this.lng, this.lat]"
+                    :propertiesFound="this.propertiesCoordinates" />
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="propertyList d-flex rounded gap-2">
+                <div class="card" v-for="property in propertiesList">
+                  <div class="image overflow-hidden rounded">
+                    <router-link :to="{
+                      name: 'single-property',
+                      params: { slug: property.slug },
+                    }">
+                      <img class="img-fluid photo-zoom card-image" :src="getImagePath(property.image)" alt="" />
+                    </router-link>
+
+                  </div>
+                  <div class="card-body">
+                    <div class="icons d-flex justify-content-between mb-3">
+                      <h6 class="text-orange"><font-awesome-icon icon="fa-solid fa-door-open" /> {{
+                        property.rooms_num
+                      }}
+                      </h6>
+                      <h6 class="text-orange"><font-awesome-icon icon="fa-solid fa-bed" /> {{
+                        property.beds_num
+                      }}</h6>
+                      <h6 class="text-orange">{{ property.square_meters }} &#13217;</h6>
+                    </div>
+                    <h4 class="card-title">{{ property.title }}</h4>
+                    <p class="card-text">{{ property.address }}</p>
+                    <p class="card-text text-orange">{{ property.price }} &euro;</p>
+                    <div class="type my-3">
+                      <strong class="text-orange" v-if="property.type">
+                        {{ property.type.name }}
+                      </strong>
+                      <span v-else>no types yet</span>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -156,5 +200,18 @@ export default {
 <style lang="scss" scoped>
 #map {
   height: 400px;
+}
+
+.propertyList {
+  overflow-x: scroll;
+  scroll-snap-type: x mandatory;
+  scroll-padding: 1rem;
+
+  .card {
+    flex: 0 0 100%;
+    padding: 1rem;
+    border-radius: 8px;
+    scroll-snap-align: start;
+  }
 }
 </style>

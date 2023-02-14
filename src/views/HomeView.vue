@@ -129,22 +129,23 @@ export default {
         </div>
         <div class="search py-5">
           <div class="row row-cols-md-2">
-            <div id="map"></div>
+            <div class="search-bar">
+              <!-- ricerca indirizzo -->
+              <input type="text" placeholder="Dove vuoi andare?" v-model="addressToSearch"
+                class="w-100 mb-3 rounded-pill px-2 px-2" @keyup.enter="geocoding">
+              <div class="d-flex align-items-center justify-content-around py-1">
+                <SearchInMap class="sticky-top" ref="map" :center="[this.lng, this.lat]"
+                  :propertiesFound="this.propertiesCoordinates" />
+              </div>
+            </div>
           </div>
           <a name="search"></a>
         </div>
-        <div class="yellow-jumbo">
-          <div class="search-bar">
-            <!-- ricerca indirizzo -->
-            <input type="text" placeholder="Dove vuoi andare?" v-model="addressToSearch"
-              class="w-100 mb-3 rounded-pill px-2 px-2" @keyup.enter="geocoding">
-            <div class="d-flex align-items-center justify-content-around py-1">
-              <SearchInMap class="sticky-top" ref="map" :center="[this.lng, this.lat]"
-                :propertiesFound="this.propertiesCoordinates" />
-            </div>
-          </div>
+      </div>
 
-        </div>
+      <div class="yellow-jumbo">
+
+
         <!--/.info-container-->
         <AppFooter></AppFooter>
       </div>

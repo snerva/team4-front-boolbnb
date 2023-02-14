@@ -12,13 +12,13 @@ export default {
             state,
             property: null,
             loading: true,
+            success: false,
+            errors: {},
             name: '',
             email: '',
             message: '',
             phone: '',
-            property: '',
-            success: false,
-            errors: {}
+            property: ''
         };
     },
     methods: {
@@ -29,14 +29,14 @@ export default {
             this.errors = {}
 
             const data = {
-                name: this.name,
-                email: this.email,
-                message: this.message,
-                phone: this.phone,
-                property: this.property
+                guest_full_name: this.name,
+                guest_email: this.email,
+                content: this.message,
+                guest_phone_number: this.phone,
+                property_id: this.property
             }
 
-            axios.post(`${this.state.api_url}/api/contacts`, data)
+            axios.post(`${this.state.api_url}/api/messages`, data)
                 .then(response => {
                     console.log(response.data.success);
                     this.success = response.data.success
@@ -59,10 +59,10 @@ export default {
         }
     },
     mounted() {
-        //console.log(this.$route.params.slug);
+
         const url =
             this.state.api_url + "/api/properties/" + this.$route.params.slug;
-        //console.log(url);
+
         axios
             .get(url)
             .then((response) => {
@@ -179,7 +179,7 @@ export default {
 
                                     <div class="mb-3">
                                         <label for="" class="form-label">Phone</label>
-                                        <input type="email" name="" id="" v-model="phone" class="form-control"
+                                        <input type="number" name="" id="" v-model="phone" class="form-control"
                                             placeholder="+39 3271569777" aria-describedby="emailHelper">
                                         <small id="emailHelper" class="text-muted">Add your Phone Number</small>
                                         <!-- error -->

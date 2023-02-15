@@ -23,7 +23,7 @@ export default {
       axios
         .get(url)
         .then((response) => {
-          console.log(response.data.results);
+          //console.log(response.data.results);
           this.properties = response.data.results;
           this.loading = false;
         })
@@ -34,13 +34,13 @@ export default {
         });
     },
     prevPage(url) {
-      console.log(url)
-      this.getProperties(url)
+      console.log(url);
+      this.getProperties(url);
     },
     nextPage(url) {
-      console.log(url)
-      this.getProperties(url)
-    }
+      console.log(url);
+      this.getProperties(url);
+    },
   },
   mounted() {
     this.getProperties(this.state.api_url + "/api/properties");
@@ -54,26 +54,34 @@ export default {
       <template v-if="properties && !loading">
         <div class="row row-cols-1 row-cols-md-4 g-4 mb-4">
           <div class="col" v-for="property in properties.data">
-            <div class="card border-0" style="height:100%">
+            <div class="card border-0" style="height: 100%">
               <div class="image overflow-hidden rounded">
-                <router-link :to="{
-                  name: 'single-property',
-                  params: { slug: property.slug },
-                }">
-                  <img class="img-fluid photo-zoom card-image" :src="getImagePath(property.image)" alt="" />
+                <router-link
+                  :to="{
+                    name: 'single-property',
+                    params: { slug: property.slug },
+                  }"
+                >
+                  <img
+                    class="img-fluid photo-zoom card-image"
+                    :src="getImagePath(property.image)"
+                    alt=""
+                  />
                 </router-link>
-
               </div>
               <div class="card-body">
                 <div class="icons d-flex justify-content-between mb-3">
-                  <h6 class="text-orange"><font-awesome-icon icon="fa-solid fa-door-open" /> {{
-                    property.rooms_num
-                  }}
+                  <h6 class="text-orange">
+                    <font-awesome-icon icon="fa-solid fa-door-open" />
+                    {{ property.rooms_num }}
                   </h6>
-                  <h6 class="text-orange"><font-awesome-icon icon="fa-solid fa-bed" /> {{
-                    property.beds_num
-                  }}</h6>
-                  <h6 class="text-orange">{{ property.square_meters }} &#13217;</h6>
+                  <h6 class="text-orange">
+                    <font-awesome-icon icon="fa-solid fa-bed" />
+                    {{ property.beds_num }}
+                  </h6>
+                  <h6 class="text-orange">
+                    {{ property.square_meters }} &#13217;
+                  </h6>
                 </div>
                 <h4 class="card-title">{{ property.title }}</h4>
                 <p class="card-text">{{ property.address }}</p>
@@ -89,9 +97,16 @@ export default {
           </div>
         </div>
 
-        <nav class="d-flex justify-content-center pt-5" aria-label="Page navigation">
+        <nav
+          class="d-flex justify-content-center pt-5"
+          aria-label="Page navigation"
+        >
           <ul class="pagination">
-            <li class="page-item" v-if="properties.prev_page_url" @click="prevPage(properties.prev_page_url)">
+            <li
+              class="page-item"
+              v-if="properties.prev_page_url"
+              @click="prevPage(properties.prev_page_url)"
+            >
               <a class="page-link" aria-label="Previous">
                 <span aria-hidden="true">&laquo;</span>
               </a>
@@ -99,7 +114,11 @@ export default {
             <li class="page-item active" aria-current="page">
               <a href="#" class="page-link">{{ properties.current_page }}</a>
             </li>
-            <li class="page-item" v-if="properties.next_page_url" @click="nextPage(properties.next_page_url)">
+            <li
+              class="page-item"
+              v-if="properties.next_page_url"
+              @click="nextPage(properties.next_page_url)"
+            >
               <a class="page-link" aria-label="Next">
                 <span aria-hidden="true">&raquo;</span>
               </a>
@@ -111,7 +130,12 @@ export default {
       <template v-else-if="loading">
         <div class="loading py-5 w-100 text-center">
           <div class="loader py-5">
-            <img src="/images/loader.gif" class="img-fluid rounded-circle mb-4" style="max-height: 400px;" alt="">
+            <img
+              src="/images/loader.gif"
+              class="img-fluid rounded-circle mb-4"
+              style="max-height: 400px"
+              alt=""
+            />
           </div>
         </div>
       </template>

@@ -44,7 +44,7 @@ export default {
       axios
         .get(
           this.state.api_url +
-            `/api/properties/filteredsearch/lng=${this.lng}/lat=${this.lat}/radius=${this.radius}/rooms=${this.rooms}/beds=${this.beds}`
+          `/api/properties/filteredsearch/lng=${this.lng}/lat=${this.lat}/radius=${this.radius}/rooms=${this.rooms}/beds=${this.beds}/amenities=${this.amenities}`
         )
         .then((res) => {
           console.log(res);
@@ -56,6 +56,20 @@ export default {
           console.log(this.filteredList);
         })
         .catch((err) => console.error(err));
+    },
+    getProperties(url) {
+      axios
+        .get(url)
+        .then((response) => {
+          console.log(response.data.results);
+          this.properties = response.data.results;
+          this.loading = false;
+        })
+        .catch((error) => {
+          console.log(error.message);
+          this.error = error.message;
+          this.loading = false;
+        });
     },
     getImagePath(path) {
       if (path) {
@@ -72,6 +86,9 @@ export default {
       this.getFilteredList(url);
     },
   },
+  mounted() {
+    this.getProperties(this.state.api_url + "/api/properties");
+  },
 };
 </script>
 
@@ -83,49 +100,36 @@ export default {
         <div class="search-bar text-center py-5">
           <div class="d-flex flex-column">
             <!-- ricerca indirizzo -->
-            <input
-              type="text"
-              placeholder="Dove vuoi andare?"
-              v-model="addressToSearch"
-              class="w-100 mb-3 rounded-pill px-2 px-2"
-              @keyup.enter="geocoding()"
-            />
+            <input type="text" placeholder="Dove vuoi andare?" v-model="addressToSearch"
+              class="w-100 mb-3 rounded-pill px-2 px-2" @keyup.enter="geocoding()" />
             <div class="d-flex align-items-center justify-content-around py-1">
               <!-- filtro numero minimo stanze -->
               <span class="d-flex align-items-center">
                 <label for="rooms">N. stanze</label>
-                <input
-                  type="number"
-                  class="rounded-pill px-2"
-                  min="1"
-                  max="8"
-                  v-model="rooms"
-                />
+                <input type="number" class="rounded-pill px-2" min="1" max="8" v-model="rooms" />
               </span>
               <!-- filtro numero minimo letti -->
               <span class="d-flex align-items-center">
                 <label for="beds">N. letti</label>
-                <input
-                  type="number"
-                  class="rounded-pill px-2"
-                  min="1"
-                  max="8"
-                  v-model="beds"
-                />
+                <input type="number" class="rounded-pill px-2" min="1" max="8" v-model="beds" />
               </span>
               <!-- filtro raggio di ricerca -->
               <span class="d-flex align-items-center">
                 <label for="radius">Raggio di Ricerca</label>
-                <input
-                  type="range"
-                  v-model="radius"
-                  min="0"
-                  max="100000"
-                  step="100"
-                />
+                <input type="range" v-model="radius" min="0" max="100000" step="100" />
                 <span id="km_tag">
                   {{ parseFloat(radius / 1000).toFixed(1) }} Km
                 </span>
+              </span>
+
+              <span class="d-flex align-items-center">
+                <label for="amenities">amenities</label>
+                <div name="amenities">
+                  <input type="checkbox" name="" id="">
+                  <span>iron</span>
+                  <input type="checkbox" name="" id="">
+                  <span>tv</span>
+                </div>
               </span>
             </div>
           </div>
@@ -137,17 +141,11 @@ export default {
         <div class="col" v-for="property in filteredList">
           <div class="card border-0" style="height: 100%">
             <div class="image overflow-hidden rounded">
-              <router-link
-                :to="{
-                  name: 'single-property',
-                  params: { slug: property.slug },
-                }"
-              >
-                <img
-                  class="img-fluid photo-zoom card-image"
-                  :src="getImagePath(property.image)"
-                  alt=""
-                />
+              <router-link :to="{
+                name: 'single-property',
+                params: { slug: property.slug },
+              }">
+                <img class="img-fluid photo-zoom card-image" :src="getImagePath(property.image)" alt="" />
               </router-link>
             </div>
             <div class="card-body">
@@ -178,16 +176,9 @@ export default {
         </div>
       </div>
 
-      <nav
-        class="d-flex justify-content-center pt-5"
-        aria-label="Page navigation"
-      >
+      <nav class="d-flex justify-content-center pt-5" aria-label="Page navigation">
         <ul class="pagination">
-          <li
-            class="page-item"
-            v-if="filteredList.prev_page_url"
-            @click="prevPage(filteredList.prev_page_url)"
-          >
+          <li class="page-item" v-if="filteredList.prev_page_url" @click="prevPage(filteredList.prev_page_url)">
             <a class="page-link" aria-label="Previous">
               <span aria-hidden="true">&laquo;</span>
             </a>
@@ -195,11 +186,7 @@ export default {
           <li class="page-item active" aria-current="page">
             <a href="#" class="page-link">{{ filteredList.current_page }}</a>
           </li>
-          <li
-            class="page-item"
-            v-if="filteredList.next_page_url"
-            @click="nextPage(filteredList.next_page_url)"
-          >
+          <li class="page-item" v-if="filteredList.next_page_url" @click="nextPage(filteredList.next_page_url)">
             <a class="page-link" aria-label="Next">
               <span aria-hidden="true">&raquo;</span>
             </a>
@@ -212,4 +199,6 @@ export default {
   <AppFooter></AppFooter>
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+
+</style>

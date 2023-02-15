@@ -1,4 +1,15 @@
 <script>
+
+
+
+
+
+
+
+
+
+
+
 import axios from "axios";
 import AppHeader from "../components/AppHeader.vue";
 import AppFooter from "../components/AppFooter.vue";
@@ -106,41 +117,43 @@ export default {
                 <section class="single-property bottom  p-5">
                     <div class="row row-cols-1 row-cols-md-2">
                         <div class="col text-center">
-                            <div class="info d-flex justify-content-around mb-3">
-                                <h4 class="text-orange"><font-awesome-icon icon="fa-solid fa-door-open" /> {{
-                                    property.rooms_num
-                                }}
-                                </h4>
-                                <h4 class="text-orange"><font-awesome-icon icon="fa-solid fa-bed" /> {{
-                                    property.beds_num
-                                }}</h4>
-                                <h4 class="text-orange">{{ property.square_meters }} &#13217;</h4>
-                            </div>
-                            <div class="description my-5">
-                                {{ property.description }}
-                            </div>
-                            <!-- type -->
-                            <div class="type mb-3">
-                                <h5 class="text-orange ">Type:
-                                    <span v-if="property.type">
-                                        {{ property.type.name }}
-                                    </span>
-                                    <span v-else>no types yet</span>
-                                </h5>
-                            </div>
-                            <!-- /.type -->
-                            <div class="amenities mb-3">
-                                <h5 class="text-orange">Amenities:
-                                    <template v-if="property.amenities.length > 0">
-                                        <span v-for="amenity in property.amenities">
-                                            #{{ amenity.name }}
+                            <div class="property-info text-center px-5 pb-5">
+                                <div class="info d-flex justify-content-around mb-3">
+                                    <h4 class="text-orange"><font-awesome-icon icon="fa-solid fa-door-open" /> {{
+                                        property.rooms_num
+                                    }}
+                                    </h4>
+                                    <h4 class="text-orange"><font-awesome-icon icon="fa-solid fa-bed" /> {{
+                                        property.beds_num
+                                    }}</h4>
+                                    <h4 class="text-orange">{{ property.square_meters }} &#13217;</h4>
+                                </div>
+                                <div class="description my-5">
+                                    {{ property.description }}
+                                </div>
+                                <!-- type -->
+                                <div class="type mb-3">
+                                    <h5 class="text-orange ">Type:
+                                        <span v-if="property.type">
+                                            {{ property.type.name }}
                                         </span>
-                                    </template>
-                                    <template v-else>
-                                        <span> No Amenities yet!</span>
-                                    </template>
-                                </h5>
+                                        <span v-else>no types yet</span>
+                                    </h5>
+                                </div>
+                                <!-- /.type -->
+                                <div class="amenities mb-3">
+                                    <h5 class="text-orange">Amenities:
+                                        <template v-if="property.amenities.length > 0">
+                                            <span v-for="amenity in property.amenities">
+                                                #{{ amenity.name }}
+                                            </span>
+                                        </template>
+                                        <template v-else>
+                                            <span> No Amenities yet!</span>
+                                        </template>
+                                    </h5>
 
+                                </div>
                             </div>
                         </div>
                         <div class="col">
@@ -150,10 +163,10 @@ export default {
                                 </div>
 
                                 <form @submit.prevent="SendForm()"
-                                    class="border shadow p-3 mb-5 bg-body-tertiary rounded-3  border border-0">
+                                    class="border shadow p-5 mb-5 bg-body-white rounded-5 border-0">
 
-                                    <div class="mb-3">
-                                        <label for="" class="form-label">Name</label>
+                                    <div class="mb-4">
+                                        <label for="" class="form-label text-orange">Name</label>
                                         <input type="text" name="name" id="name" v-model="name" class="form-control"
                                             placeholder="Mario Rossi" aria-describedby="fullNameHelper">
                                         <small id="fullNameHelper" class="text-muted">Add your full name</small>
@@ -164,8 +177,8 @@ export default {
                                     </div>
 
 
-                                    <div class="mb-3">
-                                        <label for="" class="form-label">Email</label>
+                                    <div class="mb-4">
+                                        <label for="" class="form-label text-orange">Email</label>
                                         <input type="email" name="email" id="email" v-model="email" class="form-control"
                                             placeholder="mario.rossi@example.com" aria-describedby="emailHelper">
                                         <small id="emailHelper" class="text-muted">Add your email address</small>
@@ -175,11 +188,10 @@ export default {
                                         </p>
                                     </div>
 
-                                    <div class="mb-3">
-                                        <label for="" class="form-label">Phone</label>
-                                        <input type="number" name="phone" id="phone" v-model="phone"
-                                            class="form-control" placeholder="+39 3271569777"
-                                            aria-describedby="emailHelper">
+                                    <div class="mb-4">
+                                        <label for="" class="form-label text-orange">Phone</label>
+                                        <input type="number" name="phone" id="phone" v-model="phone" class="form-control"
+                                            placeholder="+39 3271569777" aria-describedby="emailHelper">
                                         <small id="emailHelper" class="text-muted">Add your Phone Number</small>
                                         <!-- error -->
                                         <p v-for="(error) in errors.message">
@@ -187,8 +199,8 @@ export default {
                                         </p>
                                     </div>
 
-                                    <div class="mb-3">
-                                        <label for="" class="form-label">Message</label>
+                                    <div class="mb-4">
+                                        <label for="" class="form-label text-orange">Message</label>
                                         <textarea class="form-control" name="message" id="message" v-model="message"
                                             rows="5"></textarea>
                                         <!-- error -->
@@ -200,7 +212,7 @@ export default {
 
 
                                     <button type="submit" class="btn bck-orange rounded-pill" :disabled="loading">
-                                        {{ loading? 'Sending...': 'Contact me' }}
+                                        {{ loading ? 'Sending...' : 'Contact me' }}
                                     </button>
                                 </form>
                             </div>
@@ -213,9 +225,7 @@ export default {
             </template>
         </div>
     </main>
-    <AppFooter></AppFooter>
+<AppFooter></AppFooter>
 </template>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>

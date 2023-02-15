@@ -18,7 +18,6 @@ export default {
             email: '',
             message: '',
             phone: '',
-            property: ''
         };
     },
     methods: {

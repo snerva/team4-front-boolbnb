@@ -1,4 +1,5 @@
 <script>
+
 import axios from "axios";
 import { state } from "../state.js";
 
@@ -56,17 +57,11 @@ export default {
           <div class="col" v-for="property in properties.data">
             <div class="card border-0" style="height: 100%">
               <div class="image overflow-hidden rounded">
-                <router-link
-                  :to="{
-                    name: 'single-property',
-                    params: { slug: property.slug },
-                  }"
-                >
-                  <img
-                    class="img-fluid photo-zoom card-image"
-                    :src="getImagePath(property.image)"
-                    alt=""
-                  />
+                <router-link :to="{
+                  name: 'single-property',
+                  params: { slug: property.slug },
+                }">
+                  <img class="img-fluid photo-zoom card-image" :src="getImagePath(property.image)" alt="" />
                 </router-link>
               </div>
               <div class="card-body">
@@ -97,16 +92,9 @@ export default {
           </div>
         </div>
 
-        <nav
-          class="d-flex justify-content-center pt-5"
-          aria-label="Page navigation"
-        >
+        <nav class="d-flex justify-content-center pt-5" aria-label="Page navigation">
           <ul class="pagination">
-            <li
-              class="page-item"
-              v-if="properties.prev_page_url"
-              @click="prevPage(properties.prev_page_url)"
-            >
+            <li class="page-item" v-if="properties.prev_page_url" @click="prevPage(properties.prev_page_url)">
               <a class="page-link" aria-label="Previous">
                 <span aria-hidden="true">&laquo;</span>
               </a>
@@ -114,11 +102,7 @@ export default {
             <li class="page-item active" aria-current="page">
               <a href="#" class="page-link">{{ properties.current_page }}</a>
             </li>
-            <li
-              class="page-item"
-              v-if="properties.next_page_url"
-              @click="nextPage(properties.next_page_url)"
-            >
+            <li class="page-item" v-if="properties.next_page_url" @click="nextPage(properties.next_page_url)">
               <a class="page-link" aria-label="Next">
                 <span aria-hidden="true">&raquo;</span>
               </a>
@@ -130,12 +114,7 @@ export default {
       <template v-else-if="loading">
         <div class="loading py-5 w-100 text-center">
           <div class="loader py-5">
-            <img
-              src="/images/loader.gif"
-              class="img-fluid rounded-circle mb-4"
-              style="max-height: 400px"
-              alt=""
-            />
+            <img src="/images/loader.gif" class="img-fluid rounded-circle mb-4" style="max-height: 400px" alt="" />
           </div>
         </div>
       </template>
@@ -147,7 +126,7 @@ export default {
         </div>
       </template>
     </div>
-  </section>
+</section>
 </template>
 
-<style lang="" scoped></style>
+<style lang="scss" scoped></style>

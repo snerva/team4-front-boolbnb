@@ -146,9 +146,11 @@ export default {
       </div>
       <!--/.header-->
       <div class="parallax_layer sky"></div>
-      <div class="parallax_layer text text-center">
-        <h2 class="text-white">CHOOSE YOUR</h2>
-        <h1 class="text-white">NEXT DESTINATION</h1>
+      <div class="parallax_layer hero-text">
+        <div class="text text-center">
+          <h2 class="text-white">CHOOSE YOUR</h2>
+          <h1 class="text-white">NEXT DESTINATION</h1>
+        </div>
       </div>
       <div class="parallax_layer city"></div>
       <div class="parallax_layer scroll-down text-white">
@@ -169,7 +171,7 @@ export default {
           >
         </div>
         <div class="search py-5">
-          <div class="row row-cols-md-2">
+          <div class="row row-cols-1 row-cols-md-2">
             <div class="col">
               <div class="search-bar">
                 <!-- ricerca indirizzo -->

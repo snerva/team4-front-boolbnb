@@ -32,7 +32,7 @@ export default {
                 guest_email: this.email,
                 content: this.message,
                 guest_phone_number: this.phone,
-                property_id: this.property
+                property_id: this.property.id
             }
 
             axios.post(`${this.state.api_url}/api/messages`, data)
@@ -47,7 +47,6 @@ export default {
                         this.email = '';
                         this.message = '';
                         this.phone = '';
-                        this.property = ''
                     } else {
                         this.errors = response.data.errors
                     }
@@ -155,7 +154,7 @@ export default {
 
                                     <div class="mb-3">
                                         <label for="" class="form-label">Name</label>
-                                        <input type="text" name="" id="" v-model="name" class="form-control"
+                                        <input type="text" name="name" id="name" v-model="name" class="form-control"
                                             placeholder="Mario Rossi" aria-describedby="fullNameHelper">
                                         <small id="fullNameHelper" class="text-muted">Add your full name</small>
                                         <!-- error -->
@@ -167,7 +166,7 @@ export default {
 
                                     <div class="mb-3">
                                         <label for="" class="form-label">Email</label>
-                                        <input type="email" name="" id="" v-model="email" class="form-control"
+                                        <input type="email" name="email" id="email" v-model="email" class="form-control"
                                             placeholder="mario.rossi@example.com" aria-describedby="emailHelper">
                                         <small id="emailHelper" class="text-muted">Add your email address</small>
                                         <!-- error -->
@@ -178,8 +177,9 @@ export default {
 
                                     <div class="mb-3">
                                         <label for="" class="form-label">Phone</label>
-                                        <input type="number" name="" id="" v-model="phone" class="form-control"
-                                            placeholder="+39 3271569777" aria-describedby="emailHelper">
+                                        <input type="number" name="phone" id="phone" v-model="phone"
+                                            class="form-control" placeholder="+39 3271569777"
+                                            aria-describedby="emailHelper">
                                         <small id="emailHelper" class="text-muted">Add your Phone Number</small>
                                         <!-- error -->
                                         <p v-for="(error) in errors.message">
@@ -189,7 +189,7 @@ export default {
 
                                     <div class="mb-3">
                                         <label for="" class="form-label">Message</label>
-                                        <textarea class="form-control" name="" id="" v-model="message"
+                                        <textarea class="form-control" name="message" id="message" v-model="message"
                                             rows="5"></textarea>
                                         <!-- error -->
                                         <p v-for="(error) in errors.message">

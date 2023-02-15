@@ -1,4 +1,5 @@
 <script>
+
 import AppHeader from "../components/AppHeader.vue";
 import AppFooter from "../components/AppFooter.vue";
 import PropertiesList from "../components/PropertiesList.vue";
@@ -97,108 +98,128 @@ export default {
   <main>
     <div class="banner search-properties p-5">
       <div class="container p-5">
-        <div class="search-bar text-center py-5">
-          <div class="d-flex flex-column">
-            <!-- ricerca indirizzo -->
-            <input type="text" placeholder="Dove vuoi andare?" v-model="addressToSearch"
-              class="w-100 mb-3 rounded-pill px-2 px-2" @keyup.enter="geocoding()" />
-            <div class="d-flex align-items-center justify-content-around py-1">
-              <!-- filtro numero minimo stanze -->
-              <span class="d-flex align-items-center">
-                <label for="rooms">N. stanze</label>
-                <input type="number" class="rounded-pill px-2" min="1" max="8" v-model="rooms" />
-              </span>
-              <!-- filtro numero minimo letti -->
-              <span class="d-flex align-items-center">
-                <label for="beds">N. letti</label>
-                <input type="number" class="rounded-pill px-2" min="1" max="8" v-model="beds" />
-              </span>
-              <!-- filtro raggio di ricerca -->
-              <span class="d-flex align-items-center">
-                <label for="radius">Raggio di Ricerca</label>
-                <input type="range" v-model="radius" min="0" max="100000" step="100" />
-                <span id="km_tag">
+        <div class="search-bar text-center p-5">
+          <div
+            class="input-group d-flex align-items-center justify-content-center bg-dark bg-opacity-75 rounded pb-5 pt-2">
+            <div class="search-address d-flex flex-column">
+              <label for="addressToSearch" class="text-orange text-start p-2">
+                <font-awesome-icon icon="fa-solid fa-map-location-dot" /> Place</label>
+              <input type="text" placeholder="Where?" v-model="addressToSearch" class="border border-0 py-2 px-4"
+                @keyup.enter="geocoding()" />
+            </div>
+            <!--/address-->
+            <div class="search-numbs-rooms d-flex flex-column align-items-center">
+              <label for="rooms" class="text-orange p-2 text-start"><font-awesome-icon icon="fa-solid fa-door-open" />
+                Rooms</label>
+              <input type="number" class="border border-0 py-2 px-4 text-center w-100" min="1" max="8" v-model="rooms" />
+            </div>
+            <!--/numb_rooms-->
+            <div class="search-numbs-beds  d-flex flex-column align-items-center">
+              <label for="beds" class="text-orange p-2 text-start"><font-awesome-icon icon="fa-solid fa-bed" />
+                Beds</label>
+              <input type="number" class="border border-0 py-2 px-4 text-center w-100" min="1" max="8" v-model="beds" />
+            </div>
+            <!--/numbs_beds-->
+            <div class="search-radius d-flex flex-column align-items-center">
+              <label for="radius" class="text-orange text-start p-2"><font-awesome-icon icon="fa-solid fa-street-view" />
+                Radius</label>
+              <div name="radius" class="bg-white d-flex align-items-center px-4 py-1">
+                <input type="range" v-model="radius" min="0" max="100000" step="100" class=" py-2" />
+                <span id="km_tag" class="ps-2">
                   {{ parseFloat(radius / 1000).toFixed(1) }} Km
                 </span>
-              </span>
-
-              <span class="d-flex align-items-center">
-                <label for="amenities">amenities</label>
-                <div name="amenities">
-                  <input type="checkbox" name="" id="">
-                  <span>iron</span>
-                  <input type="checkbox" name="" id="">
-                  <span>tv</span>
-                </div>
-              </span>
+              </div>
             </div>
+            <!--/.radius -->
+            <div class="search-amenities">
+              <label for="amenities" class="text-orange text-start p-2"><font-awesome-icon
+                  icon="fa-solid fa-house-user" />
+                Amenities</label>
+              <div name="amenities" class="d-flex flex-column bg-white px-4">
+                <button class="btn btn-white px-2 dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                  aria-expanded="false">Choose</button>
+                <ul class="dropdown-menu dropdown-menu-end text-center border border-0">
+                  <li>
+                    <input type="checkbox" name="" id="">
+                    <span class="px-1">iron</span>
+                  </li>
+                  <li>
+                    <input type="checkbox" name="" id="">
+                    <span class="px-1">tv</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <!--/.amenities-->
           </div>
         </div>
       </div>
     </div>
     <template v-if="filteredList.length > 0">
-      <div class="row row-cols-1 row-cols-md-4 g-4 mb-4">
-        <div class="col" v-for="property in filteredList">
-          <div class="card border-0" style="height: 100%">
-            <div class="image overflow-hidden rounded">
-              <router-link :to="{
-                name: 'single-property',
-                params: { slug: property.slug },
-              }">
-                <img class="img-fluid photo-zoom card-image" :src="getImagePath(property.image)" alt="" />
-              </router-link>
-            </div>
-            <div class="card-body">
-              <div class="icons d-flex justify-content-between mb-3">
-                <h6 class="text-orange">
-                  <font-awesome-icon icon="fa-solid fa-door-open" />
-                  {{ property.rooms_num }}
-                </h6>
-                <h6 class="text-orange">
-                  <font-awesome-icon icon="fa-solid fa-bed" />
-                  {{ property.beds_num }}
-                </h6>
-                <h6 class="text-orange">
-                  {{ property.square_meters }} &#13217;
-                </h6>
-              </div>
-              <h4 class="card-title">{{ property.title }}</h4>
-              <p class="card-text">{{ property.address }}</p>
-              <p class="card-text text-orange">{{ property.price }} &euro;</p>
-              <div class="type my-3">
-                <strong class="text-orange" v-if="property.type">
-                  {{ property.type.name }}
-                </strong>
-                <span v-else>no types yet</span>
+      <section class="filtered-list pt-5">
+        <div class="container">
+          <div class="row row-cols-1 row-cols-md-4 g-4 mb-4">
+            <div class="col" v-for="property in filteredList">
+              <div class="card border-0" style="height: 100%">
+                <div class="image overflow-hidden rounded">
+                  <router-link :to="{
+                    name: 'single-property',
+                    params: { slug: property.slug },
+                  }">
+                    <img class="img-fluid photo-zoom card-image" :src="getImagePath(property.image)" alt="" />
+                  </router-link>
+                </div>
+                <div class="card-body">
+                  <div class="icons d-flex justify-content-between mb-3">
+                    <h6 class="text-orange">
+                      <font-awesome-icon icon="fa-solid fa-door-open" />
+                      {{ property.rooms_num }}
+                    </h6>
+                    <h6 class="text-orange">
+                      <font-awesome-icon icon="fa-solid fa-bed" />
+                      {{ property.beds_num }}
+                    </h6>
+                    <h6 class="text-orange">
+                      {{ property.square_meters }} &#13217;
+                    </h6>
+                  </div>
+                  <h4 class="card-title">{{ property.title }}</h4>
+                  <p class="card-text">{{ property.address }}</p>
+                  <p class="card-text text-orange">{{ property.price }} &euro;</p>
+                  <div class="type my-3">
+                    <strong class="text-orange" v-if="property.type">
+                      {{ property.type.name }}
+                    </strong>
+                    <span v-else>no types yet</span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </div>
 
-      <nav class="d-flex justify-content-center pt-5" aria-label="Page navigation">
-        <ul class="pagination">
-          <li class="page-item" v-if="filteredList.prev_page_url" @click="prevPage(filteredList.prev_page_url)">
-            <a class="page-link" aria-label="Previous">
-              <span aria-hidden="true">&laquo;</span>
-            </a>
-          </li>
-          <li class="page-item active" aria-current="page">
-            <a href="#" class="page-link">{{ filteredList.current_page }}</a>
-          </li>
-          <li class="page-item" v-if="filteredList.next_page_url" @click="nextPage(filteredList.next_page_url)">
-            <a class="page-link" aria-label="Next">
-              <span aria-hidden="true">&raquo;</span>
-            </a>
-          </li>
-        </ul>
-      </nav>
+          <nav class="d-flex justify-content-center pt-5" aria-label="Page navigation">
+            <ul class="pagination">
+              <li class="page-item" v-if="filteredList.prev_page_url" @click="prevPage(filteredList.prev_page_url)">
+                <a class="page-link" aria-label="Previous">
+                  <span aria-hidden="true">&laquo;</span>
+                </a>
+              </li>
+              <li class="page-item active" aria-current="page">
+                <a href="#" class="page-link">{{ filteredList.current_page }}</a>
+              </li>
+              <li class="page-item" v-if="filteredList.next_page_url" @click="nextPage(filteredList.next_page_url)">
+                <a class="page-link" aria-label="Next">
+                  <span aria-hidden="true">&raquo;</span>
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </section>
     </template>
     <PropertiesList v-else></PropertiesList>
   </main>
-  <AppFooter></AppFooter>
+<AppFooter></AppFooter>
 </template>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>

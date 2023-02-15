@@ -23,7 +23,7 @@ export default {
       axios
         .get(url)
         .then((response) => {
-          //console.log(response.data.results);
+          console.log(response.data.results);
           this.properties = response.data.results;
           this.loading = false;
         })

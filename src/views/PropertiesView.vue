@@ -97,14 +97,14 @@ export default {
   <AppHeader></AppHeader>
   <main>
     <div class="banner search-properties p-5">
-      <div class="container p-5">
-        <div class="search-bar text-center p-5">
+      <div class="container">
+        <div class="search-bar text-center">
           <div
             class="input-group d-flex align-items-center justify-content-center bg-dark bg-opacity-75 rounded pb-5 pt-2">
             <div class="search-address d-flex flex-column">
               <label for="addressToSearch" class="text-orange text-start p-2">
                 <font-awesome-icon icon="fa-solid fa-map-location-dot" /> Place</label>
-              <input type="text" placeholder="Where?" v-model="addressToSearch" class="border border-0 py-2 px-4"
+              <input type="text" placeholder="Where?" v-model="addressToSearch" class="border border-0 py-2 px-4 w-100"
                 @keyup.enter="geocoding()" />
             </div>
             <!--/address-->
@@ -123,8 +123,8 @@ export default {
             <div class="search-radius d-flex flex-column align-items-center">
               <label for="radius" class="text-orange text-start p-2"><font-awesome-icon icon="fa-solid fa-street-view" />
                 Radius</label>
-              <div name="radius" class="bg-white d-flex align-items-center px-4 py-1">
-                <input type="range" v-model="radius" min="0" max="100000" step="100" class=" py-2" />
+              <div name="radius" class="bg-white d-flex flex-sm-row flex-column align-items-center px-4 py-1">
+                <input type="range" v-model="radius" min="0" max="100000" step="100" class="py-2" />
                 <span id="km_tag" class="ps-2">
                   {{ parseFloat(radius / 1000).toFixed(1) }} Km
                 </span>

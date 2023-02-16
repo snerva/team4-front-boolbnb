@@ -141,38 +141,39 @@ export default {
           <h2 class="mb-3">PROPERTIES TO LOVE</h2>
           <div class="sponsorized-list">
             <!-- <div class="card text-bg-dark">
-                                    <img src="..." class="card-img" alt="">
-                                    <div class="card-img-overlay d-flex flex-column justify-content-between p-3">
-                                      <div class="info-top">
-                                        <h4 class="card-title">title</h4>
-                                        <p class="card-text">address</p>
-                                        <h5 class="card-text text-orange">price</h5>
-                                        <p class="card-text"><small>visibilty</small></p>
-                                      </div>
-                                      <div class="info-bottom d-flex justify-content-between align-items-center">
-                                        <h6 class="text-orange">
-                                          <font-awesome-icon icon="fa-solid fa-door-open" />
-                                          rooms
-                                        </h6>
-                                        <h6 class="text-orange">
-                                          <font-awesome-icon icon="fa-solid fa-bed" />
-                                          beds
-                                        </h6>
-                                        <h6 class="text-orange">
-                                          meters &#13217;
-                                        </h6>
-                                      </div>
-                                    </div>
-                                  </div> -->
+                                                                                                                                <img src="..." class="card-img" alt="">
+                                                                                                                                <div class="card-img-overlay d-flex flex-column justify-content-between p-3">
+                                                                                                                                  <div class="info-top">
+                                                                                                                                    <h4 class="card-title">title</h4>
+                                                                                                                                    <p class="card-text">address</p>
+                                                                                                                                    <h5 class="card-text text-orange">price</h5>
+                                                                                                                                    <p class="card-text"><small>visibilty</small></p>
+                                                                                                                                  </div>
+                                                                                                                                  <div class="info-bottom d-flex justify-content-between align-items-center">
+                                                                                                                                    <h6 class="text-orange">
+                                                                                                                                      <font-awesome-icon icon="fa-solid fa-door-open" />
+                                                                                                                                      rooms
+                                                                                                                                    </h6>
+                                                                                                                                    <h6 class="text-orange">
+                                                                                                                                      <font-awesome-icon icon="fa-solid fa-bed" />
+                                                                                                                                      beds
+                                                                                                                                    </h6>
+                                                                                                                                    <h6 class="text-orange">
+                                                                                                                                      meters &#13217;
+                                                                                                                                    </h6>
+                                                                                                                                  </div>
+                                                                                                                                </div>
+                                                                                                                              </div> -->
           </div>
           <router-link active-class="active" class="btn bck-orange rounded-pill px-3" :to="{ name: 'properties' }">VIEW
             ALL PROPERTIES</router-link>
         </div>
         <!--/.best-properties-->
-        <div class="search py-4">
-          <div class="row row-cols-1 row-cols-md-2 ">
+        <div class="search py-5">
+          <div class="row row-cols-1 row-cols-md-2">
             <div class="col">
               <div class="search-bar p-3">
+                <h4 class="text-orange mb-3">Search properties near you!</h4>
                 <input type="text" placeholder="What's your destination?" v-model="addressToSearch"
                   class="w-100 mb-3 rounded-pill py-2 px-3" @keyup.enter="geocoding" />
                 <div class="d-flex align-items-center justify-content-around py-1">
@@ -184,41 +185,46 @@ export default {
 
             <div class="col">
               <div class="propertyList d-flex rounded gap-2">
-                <div class="card" v-for="property in propertiesList">
-                  <div class="image overflow-hidden rounded">
+                <div class="card text-bg-dark p-0 border-0" style="max-height: 550px; max-width: 352px"
+                  v-for="property in propertiesList">
+                  <div class="card-img overflow-hidden rounded">
                     <router-link :to="{
                       name: 'single-property',
                       params: { slug: property.slug },
                     }">
-                      <img class="img-fluid photo-zoom card-image" :src="getImagePath(property.image)" alt="" />
+                      <img class="img-fluid photo-zoom card-img" :src="getImagePath(property.image)" alt="" />
+
                     </router-link>
                   </div>
-                  <div class="card-body">
-                    <div class="icons d-flex justify-content-between mb-3">
-                      <h6 class="text-orange">
+                  <div class="card-body d-flex flex-column justify-content-between p-3">
+                    <div class="icons d-flex justify-content-between mb-2">
+                      <h5 class="text-orange">
                         <font-awesome-icon icon="fa-solid fa-door-open" />
                         {{ property.rooms_num }}
-                      </h6>
-                      <h6 class="text-orange">
+                      </h5>
+                      <h5 class="text-orange">
                         <font-awesome-icon icon="fa-solid fa-bed" />
                         {{ property.beds_num }}
-                      </h6>
-                      <h6 class="text-orange">
+                      </h5>
+                      <h5 class="text-orange">
                         {{ property.square_meters }} &#13217;
-                      </h6>
+                      </h5>
+
                     </div>
-                    <h4 class="card-title">{{ property.title }}</h4>
-                    <p class="card-text">{{ property.address }}</p>
-                    <p class="card-text text-orange">
+
+                    <h5 class="card-title">{{ property.title }}</h5>
+                    <h6 class="card-text">{{ property.address }}</h6>
+                    <h6 class="card-text text-orange">
                       {{ property.price }} &euro;
-                    </p>
-                    <div class="type my-3">
-                      <strong class="text-orange" v-if="property.type">
-                        {{ property.type.name }}
-                      </strong>
-                      <span v-else>no types yet</span>
-                    </div>
+                    </h6>
+                    <h6 class="card-text text-orange" v-if="property.type">
+                      Type: {{ property.type.name }}
+                    </h6>
+                    <h6 v-else>no types yet</h6>
+
                   </div>
+
+
                 </div>
               </div>
             </div>

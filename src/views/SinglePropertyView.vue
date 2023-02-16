@@ -96,11 +96,11 @@ export default {
           <div class="row row-cols-1 row-cols-md-2">
             <div class="col d-flex justify-content-center align-items-center">
               <div class="property_title text-center px-3">
-                <h1 class="text-orange">{{ property.title }}</h1>
+                <h1 class="text-orange mb-3">{{ property.title }}</h1>
                 <p>{{ property.address }}</p>
                 <hr class="my-4" />
                 <h3 class="text-orange">{{ property.price }}&euro;</h3>
-
+                <hr class="my-4">
                 <h4 class="text-orange" v-if="property.visibility">
                   Available
                 </h4>
@@ -109,37 +109,35 @@ export default {
             </div>
             <div class="col">
               <div class="img-gallery overflow-hidden">
-                <img
-                  class="img-fluid photo-zoom"
-                  :src="state.api_url + '/storage/' + property.image"
-                  :alt="property.title"
-                />
+                <img class="img-fluid photo-zoom" :src="state.api_url + '/storage/' + property.image"
+                  :alt="property.title" />
               </div>
             </div>
           </div>
         </section>
         <section class="single-property bottom p-5">
           <div class="row row-cols-1 row-cols-md-2">
-            <div class="col text-center">
-              <div class="property-info text-center px-5 pb-5">
-                <div class="info d-flex justify-content-around mb-3">
-                  <h4 class="text-orange">
+            <div class="col">
+              <div class="property-info text-center p-5">
+                <div class="info d-flex justify-content-around mb-4">
+                  <h3 class="text-orange">
                     <font-awesome-icon icon="fa-solid fa-door-open" />
                     {{ property.rooms_num }}
-                  </h4>
-                  <h4 class="text-orange">
+                  </h3>
+                  <h3 class="text-orange">
                     <font-awesome-icon icon="fa-solid fa-bed" />
                     {{ property.beds_num }}
-                  </h4>
-                  <h4 class="text-orange">
+                  </h3>
+                  <h3 class="text-orange">
                     {{ property.square_meters }} &#13217;
-                  </h4>
+                  </h3>
                 </div>
-                <div class="description my-5">
+                <div class="description mb-4">
                   {{ property.description }}
+                  <hr>
                 </div>
                 <!-- type -->
-                <div class="type mb-3">
+                <div class="type mb-4">
                   <h5 class="text-orange">
                     Type:
                     <span v-if="property.type">
@@ -147,52 +145,36 @@ export default {
                     </span>
                     <span v-else>no types yet</span>
                   </h5>
+                  <hr>
                 </div>
                 <!-- /.type -->
                 <div class="amenities mb-3">
-                  <h5 class="text-orange">
-                    Amenities:
-                    <template v-if="property.amenities.length > 0">
-                      <span v-for="amenity in property.amenities">
-                        #{{ amenity.name }}
-                      </span>
-                    </template>
-                    <template v-else>
-                      <span> No Amenities yet!</span>
-                    </template>
+                  <h5 class="text-orange mb-3">
+                    What this property offer:
                   </h5>
+                  <template v-if="property.amenities.length > 0">
+                    <p v-for="amenity in property.amenities">
+                      <i class="fa-solid fa-hashtag"></i>{{ amenity.name }}
+                    </p>
+                  </template>
+                  <template v-else>
+                    <p> No Amenities yet!</p>
+                  </template>
                 </div>
               </div>
             </div>
             <div class="col">
               <div class="contact text-center p-5">
-                <div
-                  v-if="success"
-                  class="alert alert-success text-start"
-                  role="alert"
-                >
+                <div v-if="success" class="alert alert-success text-start" role="alert">
                   Messaggio inviato con successo!
                 </div>
 
-                <form
-                  @submit.prevent="SendForm()"
-                  class="border shadow p-5 mb-5 bg-body-white rounded-5 border-0"
-                >
+                <form @submit.prevent="SendForm()" class="border shadow p-5 mb-5 bg-body-white rounded-5 border-0">
                   <div class="mb-4">
                     <label for="" class="form-label text-orange">Name</label>
-                    <input
-                      type="text"
-                      name="name"
-                      id="name"
-                      v-model="name"
-                      class="form-control"
-                      placeholder="Mario Rossi"
-                      aria-describedby="fullNameHelper"
-                      required
-                    />
-                    <small id="fullNameHelper" class="text-muted"
-                      >Add your full name</small
-                    >
+                    <input type="text" name="name" id="name" v-model="name" class="form-control" placeholder="Mario Rossi"
+                      aria-describedby="fullNameHelper" required />
+                    <small id="fullNameHelper" class="text-muted">Add your full name</small>
                     <!-- error -->
                     <p v-for="error in errors.message">
                       {{ error }}
@@ -201,19 +183,9 @@ export default {
 
                   <div class="mb-4">
                     <label for="" class="form-label text-orange">Email</label>
-                    <input
-                      type="email"
-                      name="email"
-                      id="email"
-                      v-model="email"
-                      class="form-control"
-                      placeholder="mario.rossi@example.com"
-                      aria-describedby="emailHelper"
-                      required
-                    />
-                    <small id="emailHelper" class="text-muted"
-                      >Add your email address</small
-                    >
+                    <input type="email" name="email" id="email" v-model="email" class="form-control"
+                      placeholder="mario.rossi@example.com" aria-describedby="emailHelper" required />
+                    <small id="emailHelper" class="text-muted">Add your email address</small>
                     <!-- error -->
                     <p v-for="error in errors.message">
                       {{ error }}
@@ -222,19 +194,9 @@ export default {
 
                   <div class="mb-4">
                     <label for="" class="form-label text-orange">Phone</label>
-                    <input
-                      type="number"
-                      name="phone"
-                      id="phone"
-                      v-model="phone"
-                      class="form-control"
-                      placeholder="+39 3271569777"
-                      aria-describedby="emailHelper"
-                      required
-                    />
-                    <small id="emailHelper" class="text-muted"
-                      >Add your Phone Number</small
-                    >
+                    <input type="number" name="phone" id="phone" v-model="phone" class="form-control"
+                      placeholder="+39 3271569777" aria-describedby="emailHelper" required />
+                    <small id="emailHelper" class="text-muted">Add your Phone Number</small>
                     <!-- error -->
                     <p v-for="error in errors.message">
                       {{ error }}
@@ -243,26 +205,15 @@ export default {
 
                   <div class="mb-4">
                     <label for="" class="form-label text-orange">Message</label>
-                    <textarea
-                      class="form-control"
-                      name="message"
-                      id="message"
-                      v-model="message"
-                      rows="5"
-                      required
-                    ></textarea>
+                    <textarea class="form-control" name="message" id="message" v-model="message" rows="5"
+                      required></textarea>
                     <!-- error -->
                     <p v-for="error in errors.message">
                       {{ error }}
                     </p>
                   </div>
 
-                  <button
-                    type="submit"
-                    class="btn bck-orange rounded-pill"
-                    :disabled="loading"
-                    @click="validation()"
-                  >
+                  <button type="submit" class="btn bck-orange rounded-pill" :disabled="loading" @click="validation()">
                     {{ loading ? "Sending..." : "Contact me" }}
                   </button>
                 </form>
@@ -274,7 +225,7 @@ export default {
       </template>
     </div>
   </main>
-  <AppFooter></AppFooter>
+<AppFooter></AppFooter>
 </template>
 
 <style lang="scss" scoped>
@@ -285,6 +236,7 @@ input.error {
   outline: 2px solid red;
   border-radius: 5px;
 }
+
 textarea.error {
   background-color: ivory;
   border: none;

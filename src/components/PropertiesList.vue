@@ -53,7 +53,7 @@ export default {
   <section class="vue-home pt-5">
     <div class="container">
       <template v-if="properties && !loading">
-        <div class="row row-cols-1 row-cols-md-4 g-4 mb-4">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4 mb-4">
           <div class="col" v-for="property in properties.data">
             <div class="card border-0" style="height: 100%">
               <div class="image overflow-hidden rounded">
@@ -65,25 +65,25 @@ export default {
                 </router-link>
               </div>
               <div class="card-body">
-                <div class="icons d-flex justify-content-between mb-3">
-                  <h6 class="text-orange">
+                <div class="icons d-flex justify-content-between mb-2">
+                  <h5 class="text-orange">
                     <font-awesome-icon icon="fa-solid fa-door-open" />
                     {{ property.rooms_num }}
-                  </h6>
-                  <h6 class="text-orange">
+                  </h5>
+                  <h5 class="text-orange">
                     <font-awesome-icon icon="fa-solid fa-bed" />
                     {{ property.beds_num }}
-                  </h6>
-                  <h6 class="text-orange">
+                  </h5>
+                  <h5 class="text-orange">
                     {{ property.square_meters }} &#13217;
-                  </h6>
+                  </h5>
                 </div>
                 <h4 class="card-title">{{ property.title }}</h4>
                 <p class="card-text">{{ property.address }}</p>
-                <p class="card-text text-orange">{{ property.price }} &euro;</p>
+                <h4 class="card-text text-orange">{{ property.price }} &euro;</h4>
                 <div class="type my-3">
                   <strong class="text-orange" v-if="property.type">
-                    {{ property.type.name }}
+                    Type: {{ property.type.name }}
                   </strong>
                   <span v-else>no types yet</span>
                 </div>

@@ -45,7 +45,7 @@ export default {
       axios
         .get(
           this.state.api_url +
-          `/api/properties/filteredsearch/lng=${this.lng}/lat=${this.lat}/radius=${this.radius}/rooms=${this.rooms}/beds=${this.beds}/amenities=${this.amenities}`
+          `/api/properties/filteredsearch/lng=${this.lng}/lat=${this.lat}/radius=${this.radius}/rooms=${this.rooms}/beds=${this.beds}`
         )
         .then((res) => {
           console.log(res);
@@ -131,25 +131,25 @@ export default {
               </div>
             </div>
             <!--/.radius -->
-            <div class="search-amenities">
-              <label for="amenities" class="text-orange text-start p-2"><font-awesome-icon
-                  icon="fa-solid fa-house-user" />
-                Amenities</label>
-              <div name="amenities" class="d-flex flex-column bg-white px-4">
-                <button class="btn btn-white px-2 dropdown-toggle" type="button" data-bs-toggle="dropdown"
-                  aria-expanded="false">Choose</button>
-                <ul class="dropdown-menu dropdown-menu-end text-center border border-0">
-                  <li>
-                    <input type="checkbox" name="" id="">
-                    <span class="px-1">iron</span>
-                  </li>
-                  <li>
-                    <input type="checkbox" name="" id="">
-                    <span class="px-1">tv</span>
-                  </li>
-                </ul>
-              </div>
-            </div>
+            <!-- <div class="search-amenities">
+                  <label for="amenities" class="text-orange text-start p-2"><font-awesome-icon
+                      icon="fa-solid fa-house-user" />
+                    Amenities</label>
+                  <div name="amenities" class="d-flex flex-column bg-white px-4">
+                    <button class="btn btn-white px-2 dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                      aria-expanded="false">Choose</button>
+                    <ul class="dropdown-menu dropdown-menu-end text-center border border-0">
+                      <li>
+                        <input type="checkbox" name="" id="">
+                        <span class="px-1">iron</span>
+                      </li>
+                      <li>
+                        <input type="checkbox" name="" id="">
+                        <span class="px-1">tv</span>
+                      </li>
+                    </ul>
+                  </div>
+                </div> -->
             <!--/.amenities-->
           </div>
         </div>

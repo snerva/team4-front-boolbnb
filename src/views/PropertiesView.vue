@@ -132,24 +132,24 @@ export default {
             </div>
             <!--/.radius -->
             <!-- <div class="search-amenities">
-                        <label for="amenities" class="text-orange text-start p-2"><font-awesome-icon
-                            icon="fa-solid fa-house-user" />
-                          Amenities</label>
-                        <div name="amenities" class="d-flex flex-column bg-white px-4">
-                          <button class="btn btn-white px-2 dropdown-toggle" type="button" data-bs-toggle="dropdown"
-                            aria-expanded="false">Choose</button>
-                          <ul class="dropdown-menu dropdown-menu-end text-center border border-0">
-                            <li>
-                              <input type="checkbox" name="" id="">
-                              <span class="px-1">iron</span>
-                            </li>
-                            <li>
-                              <input type="checkbox" name="" id="">
-                              <span class="px-1">tv</span>
-                            </li>
-                          </ul>
-                        </div>
-                      </div> -->
+                          <label for="amenities" class="text-orange text-start p-2"><font-awesome-icon
+                              icon="fa-solid fa-house-user" />
+                            Amenities</label>
+                          <div name="amenities" class="d-flex flex-column bg-white px-4">
+                            <button class="btn btn-white px-2 dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                              aria-expanded="false">Choose</button>
+                            <ul class="dropdown-menu dropdown-menu-end text-center border border-0">
+                              <li>
+                                <input type="checkbox" name="" id="">
+                                <span class="px-1">iron</span>
+                              </li>
+                              <li>
+                                <input type="checkbox" name="" id="">
+                                <span class="px-1">tv</span>
+                              </li>
+                            </ul>
+                          </div>
+                        </div> -->
             <!--/.amenities-->
           </div>
         </div>
@@ -190,7 +190,7 @@ export default {
                     <strong class="text-orange" v-if="property.type">
                       {{ property.type.name }}
                     </strong>
-                    <span v-else>no types yet</span>
+                    <span v-else></span>
                   </div>
                 </div>
               </div>

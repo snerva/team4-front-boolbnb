@@ -141,29 +141,29 @@ export default {
           <h2 class="mb-3">PROPERTIES TO LOVE</h2>
           <div class="sponsorized-list">
             <!-- <div class="card text-bg-dark">
-                                                                                                                                <img src="..." class="card-img" alt="">
-                                                                                                                                <div class="card-img-overlay d-flex flex-column justify-content-between p-3">
-                                                                                                                                  <div class="info-top">
-                                                                                                                                    <h4 class="card-title">title</h4>
-                                                                                                                                    <p class="card-text">address</p>
-                                                                                                                                    <h5 class="card-text text-orange">price</h5>
-                                                                                                                                    <p class="card-text"><small>visibilty</small></p>
-                                                                                                                                  </div>
-                                                                                                                                  <div class="info-bottom d-flex justify-content-between align-items-center">
-                                                                                                                                    <h6 class="text-orange">
-                                                                                                                                      <font-awesome-icon icon="fa-solid fa-door-open" />
-                                                                                                                                      rooms
-                                                                                                                                    </h6>
-                                                                                                                                    <h6 class="text-orange">
-                                                                                                                                      <font-awesome-icon icon="fa-solid fa-bed" />
-                                                                                                                                      beds
-                                                                                                                                    </h6>
-                                                                                                                                    <h6 class="text-orange">
-                                                                                                                                      meters &#13217;
-                                                                                                                                    </h6>
-                                                                                                                                  </div>
-                                                                                                                                </div>
-                                                                                                                              </div> -->
+                                                                                                                                    <img src="..." class="card-img" alt="">
+                                                                                                                                    <div class="card-img-overlay d-flex flex-column justify-content-between p-3">
+                                                                                                                                      <div class="info-top">
+                                                                                                                                        <h4 class="card-title">title</h4>
+                                                                                                                                        <p class="card-text">address</p>
+                                                                                                                                        <h5 class="card-text text-orange">price</h5>
+                                                                                                                                        <p class="card-text"><small>visibilty</small></p>
+                                                                                                                                      </div>
+                                                                                                                                      <div class="info-bottom d-flex justify-content-between align-items-center">
+                                                                                                                                        <h6 class="text-orange">
+                                                                                                                                          <font-awesome-icon icon="fa-solid fa-door-open" />
+                                                                                                                                          rooms
+                                                                                                                                        </h6>
+                                                                                                                                        <h6 class="text-orange">
+                                                                                                                                          <font-awesome-icon icon="fa-solid fa-bed" />
+                                                                                                                                          beds
+                                                                                                                                        </h6>
+                                                                                                                                        <h6 class="text-orange">
+                                                                                                                                          meters &#13217;
+                                                                                                                                        </h6>
+                                                                                                                                      </div>
+                                                                                                                                    </div>
+                                                                                                                                  </div> -->
           </div>
           <router-link active-class="active" class="btn bck-orange rounded-pill px-3" :to="{ name: 'properties' }">VIEW
             ALL PROPERTIES</router-link>
@@ -236,7 +236,7 @@ export default {
     </div>
     <!--/.info-container-->
     <AppFooter></AppFooter>
-</div>
+  </div>
 </template>
 
 <style lang="scss" scoped>

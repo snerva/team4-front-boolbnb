@@ -55,7 +55,7 @@ export default {
       <template v-if="properties && !loading">
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4 mb-4">
           <div class="col" v-for="property in properties.data">
-            <div class="card border-0" style="height: 100%">
+            <div class="card text-bg-dark border-0" style="height: 100%">
               <div class="image overflow-hidden rounded">
                 <router-link :to="{
                   name: 'single-property',
@@ -75,7 +75,7 @@ export default {
                     {{ property.beds_num }}
                   </h5>
                   <h5 class="text-orange">
-                    {{ property.square_meters }} &#13217;
+                    {{ property.square_meters }} m&sup2
                   </h5>
                 </div>
                 <h4 class="card-title">{{ property.title }}</h4>
@@ -85,7 +85,7 @@ export default {
                   <strong class="text-orange" v-if="property.type">
                     Type: {{ property.type.name }}
                   </strong>
-                  <span v-else>no types yet</span>
+                  <span v-else></span>
                 </div>
               </div>
             </div>
@@ -126,7 +126,7 @@ export default {
         </div>
       </template>
     </div>
-</section>
+  </section>
 </template>
 
 <style lang="scss" scoped></style>

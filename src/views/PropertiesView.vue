@@ -125,31 +125,31 @@ export default {
                 Radius</label>
               <div name="radius" class="bg-white d-flex flex-sm-row flex-column align-items-center px-4 py-1">
                 <input type="range" v-model="radius" min="0" max="100000" step="100" class="py-2" />
-                <span id="km_tag" class="ps-2">
+                <span id="km_tag" class="ps-2" style="width: 100px">
                   {{ parseFloat(radius / 1000).toFixed(1) }} Km
                 </span>
               </div>
             </div>
             <!--/.radius -->
             <!-- <div class="search-amenities">
-                  <label for="amenities" class="text-orange text-start p-2"><font-awesome-icon
-                      icon="fa-solid fa-house-user" />
-                    Amenities</label>
-                  <div name="amenities" class="d-flex flex-column bg-white px-4">
-                    <button class="btn btn-white px-2 dropdown-toggle" type="button" data-bs-toggle="dropdown"
-                      aria-expanded="false">Choose</button>
-                    <ul class="dropdown-menu dropdown-menu-end text-center border border-0">
-                      <li>
-                        <input type="checkbox" name="" id="">
-                        <span class="px-1">iron</span>
-                      </li>
-                      <li>
-                        <input type="checkbox" name="" id="">
-                        <span class="px-1">tv</span>
-                      </li>
-                    </ul>
-                  </div>
-                </div> -->
+                        <label for="amenities" class="text-orange text-start p-2"><font-awesome-icon
+                            icon="fa-solid fa-house-user" />
+                          Amenities</label>
+                        <div name="amenities" class="d-flex flex-column bg-white px-4">
+                          <button class="btn btn-white px-2 dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">Choose</button>
+                          <ul class="dropdown-menu dropdown-menu-end text-center border border-0">
+                            <li>
+                              <input type="checkbox" name="" id="">
+                              <span class="px-1">iron</span>
+                            </li>
+                            <li>
+                              <input type="checkbox" name="" id="">
+                              <span class="px-1">tv</span>
+                            </li>
+                          </ul>
+                        </div>
+                      </div> -->
             <!--/.amenities-->
           </div>
         </div>
@@ -160,7 +160,7 @@ export default {
         <div class="container">
           <div class="row row-cols-1 row-cols-md-4 g-4 mb-4">
             <div class="col" v-for="property in filteredList">
-              <div class="card border-0" style="height: 100%">
+              <div class="card text-bg-dark border-0" style="height: 100%">
                 <div class="image overflow-hidden rounded">
                   <router-link :to="{
                     name: 'single-property',
@@ -180,7 +180,7 @@ export default {
                       {{ property.beds_num }}
                     </h6>
                     <h6 class="text-orange">
-                      {{ property.square_meters }} &#13217;
+                      {{ property.square_meters }} m&sup2
                     </h6>
                   </div>
                   <h4 class="card-title">{{ property.title }}</h4>
@@ -219,7 +219,7 @@ export default {
     </template>
     <PropertiesList v-else></PropertiesList>
   </main>
-<AppFooter></AppFooter>
+  <AppFooter></AppFooter>
 </template>
 
 <style lang="scss" scoped></style>

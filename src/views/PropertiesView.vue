@@ -111,13 +111,13 @@ export default {
             <div class="search-numbs-rooms d-flex flex-column align-items-center">
               <label for="rooms" class="text-orange p-2 text-start"><font-awesome-icon icon="fa-solid fa-door-open" />
                 Rooms</label>
-              <input type="number" class="border border-0 py-2 px-4 text-center w-100" min="1" max="8" v-model="rooms" />
+              <input type="number" class="border border-0 py-2 px-4 text-center w-100" min="1" max="20" v-model="rooms" />
             </div>
             <!--/numb_rooms-->
             <div class="search-numbs-beds  d-flex flex-column align-items-center">
               <label for="beds" class="text-orange p-2 text-start"><font-awesome-icon icon="fa-solid fa-bed" />
                 Beds</label>
-              <input type="number" class="border border-0 py-2 px-4 text-center w-100" min="1" max="8" v-model="beds" />
+              <input type="number" class="border border-0 py-2 px-4 text-center w-100" min="1" max="20" v-model="beds" />
             </div>
             <!--/numbs_beds-->
             <div class="search-radius d-flex flex-column align-items-center">
@@ -132,24 +132,24 @@ export default {
             </div>
             <!--/.radius -->
             <!-- <div class="search-amenities">
-                          <label for="amenities" class="text-orange text-start p-2"><font-awesome-icon
-                              icon="fa-solid fa-house-user" />
-                            Amenities</label>
-                          <div name="amenities" class="d-flex flex-column bg-white px-4">
-                            <button class="btn btn-white px-2 dropdown-toggle" type="button" data-bs-toggle="dropdown"
-                              aria-expanded="false">Choose</button>
-                            <ul class="dropdown-menu dropdown-menu-end text-center border border-0">
-                              <li>
-                                <input type="checkbox" name="" id="">
-                                <span class="px-1">iron</span>
-                              </li>
-                              <li>
-                                <input type="checkbox" name="" id="">
-                                <span class="px-1">tv</span>
-                              </li>
-                            </ul>
-                          </div>
-                        </div> -->
+                            <label for="amenities" class="text-orange text-start p-2"><font-awesome-icon
+                                icon="fa-solid fa-house-user" />
+                              Amenities</label>
+                            <div name="amenities" class="d-flex flex-column bg-white px-4">
+                              <button class="btn btn-white px-2 dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                                aria-expanded="false">Choose</button>
+                              <ul class="dropdown-menu dropdown-menu-end text-center border border-0">
+                                <li>
+                                  <input type="checkbox" name="" id="">
+                                  <span class="px-1">iron</span>
+                                </li>
+                                <li>
+                                  <input type="checkbox" name="" id="">
+                                  <span class="px-1">tv</span>
+                                </li>
+                              </ul>
+                            </div>
+                          </div> -->
             <!--/.amenities-->
           </div>
         </div>

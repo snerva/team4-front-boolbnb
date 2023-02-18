@@ -1,12 +1,7 @@
 <script>
-
-
-
-
-
-
 import AppFooter from "../components/AppFooter.vue";
 import SearchInMap from "../components/SearchInMap.vue";
+import SearchBox from "../components/SearchBox.vue";
 import { state } from "../state";
 import axios from "axios";
 
@@ -15,12 +10,11 @@ export default {
   components: {
     AppFooter,
     SearchInMap,
+    SearchBox,
   },
   data() {
     return {
       state,
-      apiKey: "BNYqu6i8McfAozT5DuF9E7cCsyItsHYt",
-      addressToSearch: "",
       tt: window.tt,
       radius: 20000, // raggio ricerca
       propertiesList: [],
@@ -34,8 +28,8 @@ export default {
     geocoding() {
       this.tt.services
         .geocode({
-          key: this.apiKey,
-          query: this.addressToSearch,
+          key: state.tt_key,
+          query: this.getSearchboxValue(),
           bestResult: true,
           language: "it-IT",
         })
@@ -49,7 +43,7 @@ export default {
       axios
         .get(
           this.state.api_url +
-          `/api/properties/search/lng=${this.lng}/lat=${this.lat}/radius=${this.radius}`
+            `/api/properties/search/lng=${this.lng}/lat=${this.lat}/radius=${this.radius}`
         )
         .then((res) => {
           this.propertiesList = res.data;
@@ -77,12 +71,14 @@ export default {
       }
       return "/images/placeholder.png";
     },
+    /* prendi il valore della ricerca su tt */
+    getSearchboxValue() {
+      return document.querySelector("input.tt-search-box-input").value;
+    },
     created() {
-      this.addressToSearch = this.firstQuery;
-      this.geocoding();
-      // richiamo funzione in componente figlio (mappa)
-      setTimeout(() => this.$refs.map.getMap(), 200);
-      // this.getServicesList();
+      // richiamo funzione in componente figlio (mappa + searchbox)
+      this.$refs.map.getMap();
+      this.$refs.search_box.getSearchBox();
     },
   },
 };
@@ -94,15 +90,35 @@ export default {
       <div class="parallax_layer header">
         <nav class="navbar bg-transparent shadow-none navbar-expand-md px-4">
           <div class="container">
-            <router-link class="navbar-brand d-flex align-items-center" :to="{ name: 'home' }" aria-current="page">
-              <img class="img-fluid logo" style="height: 77px" src="/images/logo_nav.png" alt="" />
+            <router-link
+              class="navbar-brand d-flex align-items-center"
+              :to="{ name: 'home' }"
+              aria-current="page"
+            >
+              <img
+                class="img-fluid logo"
+                style="height: 77px"
+                src="/images/logo_nav.png"
+                alt=""
+              />
             </router-link>
-            <button class="navbar-toggler d-md-none p-2 border border-white" type="button" data-bs-toggle="collapse"
-              data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-              aria-label="Toggle navigation">
-              <span class="toggler-icon text-white"><font-awesome-icon icon="fa-solid fa-bars" /></span>
+            <button
+              class="navbar-toggler d-md-none p-2 border border-white"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarSupportedContent"
+              aria-controls="navbarSupportedContent"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="toggler-icon text-white"
+                ><font-awesome-icon icon="fa-solid fa-bars"
+              /></span>
             </button>
-            <div class="collapse navbar-collapse flex-md-grow-0" id="navbarSupportedContent">
+            <div
+              class="collapse navbar-collapse flex-md-grow-0"
+              id="navbarSupportedContent"
+            >
               <ul class="navbar-nav m-auto">
                 <li class="nav-item pe-3">
                   <a href="#search" class="nav-link">
@@ -110,11 +126,20 @@ export default {
                   </a>
                 </li>
                 <li class="nav-item pe-3">
-                  <router-link active-class="active" class="nav-link" :to="{ name: 'properties' }">ALL
-                    PROPERTIES</router-link>
+                  <router-link
+                    active-class="active"
+                    class="nav-link"
+                    :to="{ name: 'properties' }"
+                    >ALL PROPERTIES</router-link
+                  >
                 </li>
                 <li class="nav-item pe-3">
-                  <router-link active-class="active" class="nav-link" :to="{ name: 'about' }">ABOUT US</router-link>
+                  <router-link
+                    active-class="active"
+                    class="nav-link"
+                    :to="{ name: 'about' }"
+                    >ABOUT US</router-link
+                  >
                 </li>
               </ul>
             </div>
@@ -165,8 +190,12 @@ export default {
                 </div>
               </div> -->
           </div>
-          <router-link active-class="active" class="btn bck-orange rounded-pill px-3" :to="{ name: 'properties' }">VIEW
-            ALL PROPERTIES</router-link>
+          <router-link
+            active-class="active"
+            class="btn bck-orange rounded-pill px-3"
+            :to="{ name: 'properties' }"
+            >VIEW ALL PROPERTIES</router-link
+          >
         </div>
         <!--/.best-properties-->
         <div class="search py-5">
@@ -174,29 +203,51 @@ export default {
             <div class="col">
               <div class="search-bar p-3">
                 <h4 class="text-orange mb-3">Search properties near you!</h4>
-                <input type="text" placeholder="What's your destination?" v-model="addressToSearch"
-                  class="w-100 mb-3 rounded-pill py-2 px-3" @keyup.enter="geocoding" />
-                <div class="d-flex align-items-center justify-content-around py-1">
-                  <SearchInMap class="sticky-top" ref="map" :center="[this.lng, this.lat]"
-                    :propertiesFound="this.propertiesCoordinates" />
+                <!-- <input
+                  type="text"
+                  placeholder="What's your destination?"
+                  v-model="addressToSearch"
+                  class="w-100 mb-3 rounded-pill py-2 px-3"
+                  @keyup.enter="geocoding"
+                /> -->
+                <SearchBox ref="search_box" @keyup.enter="geocoding" />
+                <div
+                  class="d-flex align-items-center justify-content-around py-1"
+                >
+                  <SearchInMap
+                    class="sticky-top"
+                    ref="map"
+                    :center="[this.lng, this.lat]"
+                    :propertiesFound="this.propertiesCoordinates"
+                  />
                 </div>
               </div>
             </div>
 
             <div class="col">
               <div class="propertyList d-flex rounded gap-2">
-                <div class="card text-bg-dark p-0 border-0" style="max-height: 550px; max-width: 352px"
-                  v-for="property in propertiesList">
+                <div
+                  class="card text-bg-dark p-0 border-0"
+                  style="max-height: 550px; max-width: 352px"
+                  v-for="property in propertiesList"
+                >
                   <div class="card-img overflow-hidden rounded">
-                    <router-link :to="{
-                      name: 'single-property',
-                      params: { slug: property.slug },
-                    }">
-                      <img class="img-fluid photo-zoom card-img" :src="getImagePath(property.image)" alt="" />
-
+                    <router-link
+                      :to="{
+                        name: 'single-property',
+                        params: { slug: property.slug },
+                      }"
+                    >
+                      <img
+                        class="img-fluid photo-zoom card-img"
+                        :src="getImagePath(property.image)"
+                        alt=""
+                      />
                     </router-link>
                   </div>
-                  <div class="card-body d-flex flex-column justify-content-between p-3">
+                  <div
+                    class="card-body d-flex flex-column justify-content-between p-3"
+                  >
                     <div class="icons d-flex justify-content-between mb-2">
                       <h5 class="text-orange">
                         <font-awesome-icon icon="fa-solid fa-door-open" />
@@ -209,7 +260,6 @@ export default {
                       <h5 class="text-orange">
                         {{ property.square_meters }} &#13217;
                       </h5>
-
                     </div>
 
                     <h5 class="card-title">{{ property.title }}</h5>
@@ -221,10 +271,7 @@ export default {
                       Type: {{ property.type.name }}
                     </h6>
                     <h6 v-else>no types yet</h6>
-
                   </div>
-
-
                 </div>
               </div>
             </div>

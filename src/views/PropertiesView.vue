@@ -22,6 +22,7 @@ export default {
       lng: "",
       lat: "",
       amenities: [],
+      amenitiesList: [],
     };
   },
   methods: {
@@ -45,7 +46,7 @@ export default {
       axios
         .get(
           this.state.api_url +
-            `/api/properties/filteredsearch/lng=${this.lng}/lat=${this.lat}/radius=${this.radius}/rooms=${this.rooms}/beds=${this.beds}/amenities=${this.amenities}`
+          `/api/properties/filteredsearch/lng=${this.lng}/lat=${this.lat}/radius=${this.radius}/rooms=${this.rooms}/beds=${this.beds}/amenities=${this.amenities}`
         )
         .then((res) => {
           console.log(res);
@@ -64,6 +65,20 @@ export default {
         .then((response) => {
           //console.log(response.data.results);
           this.properties = response.data.results;
+          this.loading = false;
+        })
+        .catch((error) => {
+          console.log(error.message);
+          this.error = error.message;
+          this.loading = false;
+        });
+    },
+    getAmenities(url) {
+      axios
+        .get(url)
+        .then((response) => {
+          //console.log(response);
+          this.amenitiesList = response.data;
           this.loading = false;
         })
         .catch((error) => {
@@ -97,6 +112,7 @@ export default {
   },
   mounted() {
     this.getProperties(this.state.api_url + "/api/properties");
+    this.getAmenities(this.state.api_url + "/api/amenities");
   },
 };
 </script>
@@ -108,70 +124,38 @@ export default {
       <div class="container">
         <div class="search-bar text-center">
           <div
-            class="input-group d-flex align-items-center justify-content-center bg-dark bg-opacity-75 rounded pb-5 pt-2"
-          >
+            class="input-group d-flex align-items-center justify-content-center bg-dark bg-opacity-75 rounded pb-5 pt-2">
             <div class="search-address d-flex flex-column">
               <label for="addressToSearch" class="text-orange text-start p-2">
                 <font-awesome-icon icon="fa-solid fa-map-location-dot" />
-                Place</label
-              >
+                Place</label>
               <!-- <input
-                type="text"
-                placeholder="Where?"
-                v-model="addressToSearch"
-                class="border border-0 py-2 px-4 w-100"
-                @keyup.enter="geocoding()"
-              /> -->
+                                          type="text"
+                                          placeholder="Where?"
+                                          v-model="addressToSearch"
+                                          class="border border-0 py-2 px-4 w-100"
+                                          @keyup.enter="geocoding()"
+                                        /> -->
               <SearchBox ref="search_box" @keyup.enter="geocoding" />
             </div>
             <!--/address-->
-            <div
-              class="search-numbs-rooms d-flex flex-column align-items-center"
-            >
-              <label for="rooms" class="text-orange p-2 text-start"
-                ><font-awesome-icon icon="fa-solid fa-door-open" /> Rooms</label
-              >
-              <input
-                type="number"
-                class="border border-0 py-2 px-4 text-center w-100"
-                min="1"
-                max="20"
-                v-model="rooms"
-              />
+            <div class="search-numbs-rooms d-flex flex-column align-items-center">
+              <label for="rooms" class="text-orange p-2 text-start"><font-awesome-icon icon="fa-solid fa-door-open" />
+                Rooms</label>
+              <input type="number" class="border border-0 py-2 px-4 text-center w-100" min="1" max="20" v-model="rooms" />
             </div>
             <!--/numb_rooms-->
-            <div
-              class="search-numbs-beds d-flex flex-column align-items-center"
-            >
-              <label for="beds" class="text-orange p-2 text-start"
-                ><font-awesome-icon icon="fa-solid fa-bed" /> Beds</label
-              >
-              <input
-                type="number"
-                class="border border-0 py-2 px-4 text-center w-100"
-                min="1"
-                max="20"
-                v-model="beds"
-              />
+            <div class="search-numbs-beds d-flex flex-column align-items-center">
+              <label for="beds" class="text-orange p-2 text-start"><font-awesome-icon icon="fa-solid fa-bed" />
+                Beds</label>
+              <input type="number" class="border border-0 py-2 px-4 text-center w-100" min="1" max="20" v-model="beds" />
             </div>
             <!--/numbs_beds-->
             <div class="search-radius d-flex flex-column align-items-center">
-              <label for="radius" class="text-orange text-start p-2"
-                ><font-awesome-icon icon="fa-solid fa-street-view" />
-                Radius</label
-              >
-              <div
-                name="radius"
-                class="bg-white d-flex flex-sm-row flex-column align-items-center px-4 py-1"
-              >
-                <input
-                  type="range"
-                  v-model="radius"
-                  min="0"
-                  max="100000"
-                  step="100"
-                  class="py-2"
-                />
+              <label for="radius" class="text-orange text-start p-2"><font-awesome-icon icon="fa-solid fa-street-view" />
+                Radius</label>
+              <div name="radius" class="bg-white d-flex flex-sm-row flex-column align-items-center px-4 py-1">
+                <input type="range" v-model="radius" min="0" max="100000" step="100" class="py-2" />
                 <span id="km_tag" class="ps-2" style="width: 100px">
                   {{ parseFloat(radius / 1000).toFixed(1) }} Km
                 </span>
@@ -179,42 +163,21 @@ export default {
             </div>
             <!--/.radius -->
             <div class="search-amenities">
-              <label for="amenities" class="text-orange text-start p-2"
-                ><font-awesome-icon icon="fa-solid fa-house-user" />
-                Amenities</label
-              >
+              <label for="amenities" class="text-orange text-start p-2"><font-awesome-icon
+                  icon="fa-solid fa-house-user" />
+                Amenities</label>
               <div name="amenities" class="d-flex flex-column bg-white px-4">
-                <button
-                  class="btn btn-white px-2 dropdown-toggle"
-                  type="button"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                >
+                <button class="btn btn-white px-2 dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                  aria-expanded="false">
                   Choose
                 </button>
-                <ul
-                  class="dropdown-menu dropdown-menu-end text-center border border-0"
-                >
-                  <li>
-                    <input
-                      type="checkbox"
-                      name="iron"
-                      id="iron"
-                      v-model="amenities"
-                      value="Iron"
-                    />
-                    <span class="px-1">iron</span>
+                <ul class="dropdown-menu dropdown-menu-end text-center border border-0">
+                  <li v-for="amenity in amenitiesList">
+                    <input type="checkbox" :name="amenity.name" :id="amenity.name" v-model="amenities"
+                      :value="amenity.name" />
+                    <span class="px-1">{{ amenity.name }}</span>
                   </li>
-                  <li>
-                    <input
-                      type="checkbox"
-                      name="tv"
-                      id="tv"
-                      v-model="amenities"
-                      value="TV"
-                    />
-                    <span class="px-1">tv</span>
-                  </li>
+
                 </ul>
               </div>
             </div>
@@ -231,17 +194,11 @@ export default {
             <div class="col" v-for="property in filteredList">
               <div class="card text-bg-dark border-0" style="height: 100%">
                 <div class="image overflow-hidden rounded">
-                  <router-link
-                    :to="{
-                      name: 'single-property',
-                      params: { slug: property.slug },
-                    }"
-                  >
-                    <img
-                      class="img-fluid photo-zoom card-image"
-                      :src="getImagePath(property.image)"
-                      alt=""
-                    />
+                  <router-link :to="{
+                    name: 'single-property',
+                    params: { slug: property.slug },
+                  }">
+                    <img class="img-fluid photo-zoom card-image" :src="getImagePath(property.image)" alt="" />
                   </router-link>
                 </div>
                 <div class="card-body">
@@ -274,16 +231,9 @@ export default {
             </div>
           </div>
 
-          <nav
-            class="d-flex justify-content-center pt-5"
-            aria-label="Page navigation"
-          >
+          <nav class="d-flex justify-content-center pt-5" aria-label="Page navigation">
             <ul class="pagination">
-              <li
-                class="page-item"
-                v-if="filteredList.prev_page_url"
-                @click="prevPage(filteredList.prev_page_url)"
-              >
+              <li class="page-item" v-if="filteredList.prev_page_url" @click="prevPage(filteredList.prev_page_url)">
                 <a class="page-link" aria-label="Previous">
                   <span aria-hidden="true">&laquo;</span>
                 </a>
@@ -293,11 +243,7 @@ export default {
                   filteredList.current_page
                 }}</a>
               </li>
-              <li
-                class="page-item"
-                v-if="filteredList.next_page_url"
-                @click="nextPage(filteredList.next_page_url)"
-              >
+              <li class="page-item" v-if="filteredList.next_page_url" @click="nextPage(filteredList.next_page_url)">
                 <a class="page-link" aria-label="Next">
                   <span aria-hidden="true">&raquo;</span>
                 </a>

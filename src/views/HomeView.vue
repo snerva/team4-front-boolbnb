@@ -259,7 +259,7 @@ export default {
     <!--/.info-container-->
     <div class="parallax_group review-container">
       <div class="container">
-        <div class="review py-5">
+        <div class="review py-5 d-none d-md-block">
           <div id="carousel" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
               <div class="carousel-item active p-5" data-bs-interval="4000">

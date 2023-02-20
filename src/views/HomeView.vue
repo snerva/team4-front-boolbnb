@@ -154,11 +154,6 @@ export default {
             <div class="title">
               <h2 class="text-orange">PROPERTIES TO LOVE</h2>
             </div>
-            <div class="link">
-              <router-link active-class="active" class="btn bck-orange rounded-pill px-3"
-                :to="{ name: 'properties' }">VIEW
-                ALL PROPERTIES <font-awesome-icon icon="fa-solid fa-arrow-right-long" /></router-link>
-            </div>
           </div>
           <div class="sponsorized-list propertyList d-flex rounded gap-2 pb-5">
             <div class="card text-bg-dark p-0 border-0" style="max-height: 550px; max-width: 352px"
@@ -194,17 +189,13 @@ export default {
               </div>
             </div>
           </div>
-
+          <div class="link text-center">
+            <router-link active-class="active" class="btn bck-orange rounded-pill px-3" :to="{ name: 'properties' }">VIEW
+              ALL PROPERTIES <font-awesome-icon icon="fa-solid fa-arrow-right-long" /></router-link>
+          </div>
         </div>
         <!--/.best-properties-->
-        <div class="quotes text-center py-5">
-          <blockquote class="blockquote">
-            <h2>"Travel is not really about leaving our homes, but leaving our habits."</h2>
-          </blockquote>
-          <figcaption class="blockquote-footer fs-4">
-            Pico Iyer
-          </figcaption>
-        </div>
+
       </div>
     </div>
     <!--/.info-container-->
@@ -290,6 +281,14 @@ export default {
               <span class="visually-hidden">Next</span>
             </button>
           </div>
+        </div>
+        <div class="quotes text-center py-5">
+          <blockquote class="blockquote">
+            <h2>"Travel is not really about leaving our homes, but leaving our habits."</h2>
+          </blockquote>
+          <figcaption class="blockquote-footer fs-4">
+            Pico Iyer
+          </figcaption>
         </div>
       </div>
     </div>

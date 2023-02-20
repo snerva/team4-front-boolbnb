@@ -246,7 +246,7 @@ export default {
                         {{ property.beds_num }}
                       </h5>
                       <h5 class="text-orange">
-                        {{ property.square_meters }} &#13217;
+                        {{ property.square_meters }} m&sup2;
                       </h5>
                     </div>
 

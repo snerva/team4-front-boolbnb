@@ -182,7 +182,7 @@ export default {
             <!--/.amenities-->
             <div class="search-button px-2">
               <label for="submit" class="pt-5"></label>
-              <button name="submit" type="submit" class="button2" @click="geocoding">Search</button>
+              <button name="submit" type="submit" class="button2 rounded-pill" @click="geocoding">Search</button>
             </div>
           </div>
         </div>
@@ -235,24 +235,24 @@ export default {
             </div>
 
             <!-- <nav class="d-flex justify-content-center pt-5" aria-label="Page navigation">
-                                                                                            <ul class="pagination">
-                                                                                              <li class="page-item" v-if="filteredList.prev_page_url" @click="prevPage(filteredList.prev_page_url)">
-                                                                                                <a class="page-link" aria-label="Previous">
-                                                                                                  <span aria-hidden="true">&laquo;</span>
-                                                                                                </a>
-                                                                                              </li>
-                                                                                              <li class="page-item active" aria-current="page">
-                                                                                                <a href="#" class="page-link">{{
-                                                                                                  filteredList.current_page
-                                                                                                }}</a>
-                                                                                              </li>
-                                                                                              <li class="page-item" v-if="filteredList.next_page_url" @click="nextPage(filteredList.next_page_url)">
-                                                                                                <a class="page-link" aria-label="Next">
-                                                                                                  <span aria-hidden="true">&raquo;</span>
-                                                                                                </a>
-                                                                                              </li>
-                                                                                            </ul>
-                                                                                          </nav> -->
+                                                                                                        <ul class="pagination">
+                                                                                                          <li class="page-item" v-if="filteredList.prev_page_url" @click="prevPage(filteredList.prev_page_url)">
+                                                                                                            <a class="page-link" aria-label="Previous">
+                                                                                                              <span aria-hidden="true">&laquo;</span>
+                                                                                                            </a>
+                                                                                                          </li>
+                                                                                                          <li class="page-item active" aria-current="page">
+                                                                                                            <a href="#" class="page-link">{{
+                                                                                                              filteredList.current_page
+                                                                                                            }}</a>
+                                                                                                          </li>
+                                                                                                          <li class="page-item" v-if="filteredList.next_page_url" @click="nextPage(filteredList.next_page_url)">
+                                                                                                            <a class="page-link" aria-label="Next">
+                                                                                                              <span aria-hidden="true">&raquo;</span>
+                                                                                                            </a>
+                                                                                                          </li>
+                                                                                                        </ul>
+                                                                                                      </nav> -->
           </div>
         </section>
       </template>
@@ -285,12 +285,11 @@ export default {
   position: relative;
   overflow: hidden;
   z-index: 1;
-  color: #090909;
+  color: #ff8d34;
   padding: 6px 20px;
   font-size: 18px;
-  border-radius: 0.5em;
-  background: #e8e8e8;
-  border: 1px solid #e8e8e8;
+  background: transparent;
+  border: 1px solid #ff8d34;
 }
 
 .button2:active {

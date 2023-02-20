@@ -155,7 +155,7 @@ export default {
               <h2 class="text-orange">PROPERTIES TO LOVE</h2>
             </div>
           </div>
-          <div class="sponsorized-list propertyList d-flex rounded gap-2 pb-5">
+          <div class="sponsorized-list propertyList d-flex rounded gap-2">
             <div class="card text-bg-dark p-0 border-0" style="max-height: 550px; max-width: 352px"
               v-for="sponsored in sponsoredList">
               <router-link :to="{
@@ -189,7 +189,7 @@ export default {
               </div>
             </div>
           </div>
-          <div class="link text-center">
+          <div class="link text-center py-5">
             <router-link active-class="active" class="btn bck-orange rounded-pill px-3" :to="{ name: 'properties' }">VIEW
               ALL PROPERTIES <font-awesome-icon icon="fa-solid fa-arrow-right-long" /></router-link>
           </div>
@@ -257,9 +257,9 @@ export default {
       </div>
     </div>
     <!--/.info-container-->
-    <div class="parallax_group review-container">
+    <div class="parallax_group review-container d-none d-md-block">
       <div class="container">
-        <div class="review py-5 d-none d-md-block">
+        <div class="review py-5">
           <div id="carousel" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
               <div class="carousel-item active p-5" data-bs-interval="4000">

@@ -260,15 +260,15 @@ export default {
     <div class="parallax_group review-container">
       <div class="container">
         <div class="review py-5">
-          <div id="carousel" class="carousel slide">
+          <div id="carousel" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
-              <div class="carousel-item active p-5">
+              <div class="carousel-item active p-5" data-bs-interval="4000">
                 <img src="/images/slider_1.png" class="d-block w-100" alt="...">
               </div>
-              <div class="carousel-item p-5">
+              <div class="carousel-item p-5" data-bs-interval="4000">
                 <img src="/images/slider_2.png" class="d-block w-100" alt="...">
               </div>
-              <div class="carousel-item p-5">
+              <div class="carousel-item p-5" data-bs-interval="4000">
                 <img src="/images/slider_3.png" class="d-block w-100" alt="...">
               </div>
             </div>

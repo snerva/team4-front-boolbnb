@@ -17,7 +17,7 @@ export default {
       radius: 20000, // raggio ricerca
       rooms: 1,
       beds: 1,
-      filteredList: [],
+      filteredList: null,
       propertiesCoordinates: [],
       lng: "",
       lat: "",
@@ -130,12 +130,12 @@ export default {
                 <font-awesome-icon icon="fa-solid fa-map-location-dot" />
                 Place</label>
               <!-- <input
-                                          type="text"
-                                          placeholder="Where?"
-                                          v-model="addressToSearch"
-                                          class="border border-0 py-2 px-4 w-100"
-                                          @keyup.enter="geocoding()"
-                                        /> -->
+                                                                        type="text"
+                                                                        placeholder="Where?"
+                                                                        v-model="addressToSearch"
+                                                                        class="border border-0 py-2 px-4 w-100"
+                                                                        @keyup.enter="geocoding()"
+                                                                      /> -->
               <SearchBox ref="search_box" @keyup.enter="geocoding" />
             </div>
             <!--/address-->
@@ -187,73 +187,82 @@ export default {
         </div>
       </div>
     </div>
-    <template v-if="filteredList.length > 0">
-      <section class="filtered-list pt-5">
-        <div class="container">
-          <div class="row row-cols-1 row-cols-md-4 g-4 mb-4">
-            <div class="col" v-for="property in filteredList">
-              <div class="card text-bg-dark border-0" style="height: 100%">
-                <div class="image overflow-hidden rounded">
-                  <router-link :to="{
-                    name: 'single-property',
-                    params: { slug: property.slug },
-                  }">
-                    <img class="img-fluid photo-zoom card-image" :src="getImagePath(property.image)" alt="" />
-                  </router-link>
-                </div>
-                <div class="card-body">
-                  <div class="icons d-flex justify-content-between mb-3">
-                    <h6 class="text-orange">
-                      <font-awesome-icon icon="fa-solid fa-door-open" />
-                      {{ property.rooms_num }}
-                    </h6>
-                    <h6 class="text-orange">
-                      <font-awesome-icon icon="fa-solid fa-bed" />
-                      {{ property.beds_num }}
-                    </h6>
-                    <h6 class="text-orange">
-                      {{ property.square_meters }} m&sup2
-                    </h6>
+
+    <div v-if="filteredList">
+      <template v-if="filteredList.length > 0">
+        <section class="filtered-list pt-5">
+          <div class="container">
+            <div class="row row-cols-1 row-cols-md-4 g-4 mb-4">
+              <div class="col" v-for="property in filteredList">
+                <div class="card text-bg-dark border-0" style="height: 100%">
+                  <div class="image overflow-hidden rounded">
+                    <router-link :to="{
+                      name: 'single-property',
+                      params: { slug: property.slug },
+                    }">
+                      <img class="img-fluid photo-zoom card-image" :src="getImagePath(property.image)" alt="" />
+                    </router-link>
                   </div>
-                  <h4 class="card-title">{{ property.title }}</h4>
-                  <p class="card-text">{{ property.address }}</p>
-                  <p class="card-text text-orange">
-                    {{ property.price }} &euro;
-                  </p>
-                  <div class="type my-3">
-                    <strong class="text-orange" v-if="property.type">
-                      {{ property.type.name }}
-                    </strong>
-                    <span v-else></span>
+                  <div class="card-body">
+                    <div class="icons d-flex justify-content-between mb-3">
+                      <h6 class="text-orange">
+                        <font-awesome-icon icon="fa-solid fa-door-open" />
+                        {{ property.rooms_num }}
+                      </h6>
+                      <h6 class="text-orange">
+                        <font-awesome-icon icon="fa-solid fa-bed" />
+                        {{ property.beds_num }}
+                      </h6>
+                      <h6 class="text-orange">
+                        {{ property.square_meters }} m&sup2
+                      </h6>
+                    </div>
+                    <h4 class="card-title">{{ property.title }}</h4>
+                    <p class="card-text">{{ property.address }}</p>
+                    <p class="card-text text-orange">
+                      {{ property.price }} &euro;
+                    </p>
+                    <div class="type my-3">
+                      <strong class="text-orange" v-if="property.type">
+                        {{ property.type.name }}
+                      </strong>
+                      <span v-else></span>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
 
-          <nav class="d-flex justify-content-center pt-5" aria-label="Page navigation">
-            <ul class="pagination">
-              <li class="page-item" v-if="filteredList.prev_page_url" @click="prevPage(filteredList.prev_page_url)">
-                <a class="page-link" aria-label="Previous">
-                  <span aria-hidden="true">&laquo;</span>
-                </a>
-              </li>
-              <li class="page-item active" aria-current="page">
-                <a href="#" class="page-link">{{
-                  filteredList.current_page
-                }}</a>
-              </li>
-              <li class="page-item" v-if="filteredList.next_page_url" @click="nextPage(filteredList.next_page_url)">
-                <a class="page-link" aria-label="Next">
-                  <span aria-hidden="true">&raquo;</span>
-                </a>
-              </li>
-            </ul>
-          </nav>
-        </div>
-      </section>
-    </template>
-    <PropertiesList v-else></PropertiesList>
+            <nav class="d-flex justify-content-center pt-5" aria-label="Page navigation">
+              <ul class="pagination">
+                <li class="page-item" v-if="filteredList.prev_page_url" @click="prevPage(filteredList.prev_page_url)">
+                  <a class="page-link" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                  </a>
+                </li>
+                <li class="page-item active" aria-current="page">
+                  <a href="#" class="page-link">{{
+                    filteredList.current_page
+                  }}</a>
+                </li>
+                <li class="page-item" v-if="filteredList.next_page_url" @click="nextPage(filteredList.next_page_url)">
+                  <a class="page-link" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                  </a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </section>
+      </template>
+      <template v-else-if="filteredList.length == 0">
+        <!-- TODO -->
+        <p>No results</p>
+      </template>
+    </div>
+    <div v-else>
+      <PropertiesList />
+    </div>
   </main>
   <AppFooter></AppFooter>
 </template>

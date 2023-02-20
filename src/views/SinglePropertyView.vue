@@ -166,7 +166,7 @@ export default {
             <div class="col">
               <div class="contact text-center p-5">
                 <div v-if="success" class="alert alert-success text-start" role="alert">
-                  Messaggio inviato con successo!
+                  Message sent successfully!
                 </div>
 
                 <form @submit.prevent="SendForm()" class="border shadow p-5 mb-5 bg-body-white rounded-5 border-0">
@@ -225,7 +225,7 @@ export default {
       </template>
     </div>
   </main>
-<AppFooter></AppFooter>
+  <AppFooter></AppFooter>
 </template>
 
 <style lang="scss" scoped>

@@ -23,6 +23,7 @@ export default {
       lat: "",
       amenities: [],
       amenitiesList: [],
+      loading: true,
     };
   },
   methods: {
@@ -51,13 +52,18 @@ export default {
         .then((res) => {
           console.log(res);
           this.filteredList = res.data.results;
+          this.loading = false;
 
           // svuoto array coordinate degli appartamenti trovati
           this.apartmentsCoordinates = [];
 
           console.log(this.filteredList);
         })
-        .catch((err) => console.error(err));
+        .catch((err) => {
+          console.error(err)
+          this.error = error.message;
+          this.loading = false;
+        });
     },
     getProperties(url) {
       axios
@@ -119,12 +125,11 @@ export default {
 
 <template>
   <AppHeader></AppHeader>
-  <main>
-    <div class="banner search-properties p-5">
-      <div class="container">
+<main>
+  <div class="banner search-properties p-5">
+    <div class="container">
         <div class="search-bar text-center">
-          <div
-            class="input-group d-flex align-items-center justify-content-center bg-dark bg-opacity-75 rounded pb-5 pt-2">
+          <div class="input-group d-flex align-items-end justify-content-center bg-dark bg-opacity-75 rounded pb-5 pt-2">
             <div class="search-address d-flex flex-column">
               <label for="addressToSearch" class="text-orange text-start p-2">
                 <font-awesome-icon icon="fa-solid fa-map-location-dot" />
@@ -148,7 +153,7 @@ export default {
               <label for="radius" class="text-orange text-start p-2"><font-awesome-icon icon="fa-solid fa-street-view" />
                 Radius</label>
               <div name="radius" class="bg-white d-flex flex-sm-row flex-column align-items-center px-4 py-1">
-                <input type="range" v-model="radius" min="0" max="100000" step="100" class="py-2" />
+                <input type="range" v-model="radius" min="0" max="30000" step="100" class="py-2" />
                 <span id="km_tag" class="ps-2" style="width: 100px">
                   {{ parseFloat(radius / 1000).toFixed(1) }} Km
                 </span>
@@ -164,7 +169,7 @@ export default {
                   aria-expanded="false">
                   Choose
                 </button>
-                <ul class="dropdown-menu dropdown-menu-end text-center border border-0">
+                <ul class="dropdown-menu dropdown-menu-end text-start p-1 border border-0">
                   <li v-for="amenity in amenitiesList">
                     <input type="checkbox" :name="amenity.name" :id="amenity.name" v-model="amenities"
                       :value="amenity.name" />
@@ -174,14 +179,17 @@ export default {
                 </ul>
               </div>
             </div>
-            -->
             <!--/.amenities-->
+            <div class="search-button px-2">
+              <label for="submit" class="pt-5"></label>
+              <button name="submit" type="submit" class="button2" @click="geocoding">Search</button>
+            </div>
           </div>
         </div>
       </div>
     </div>
 
-    <div v-if="filteredList">
+    <div v-if="filteredList && !loading">
       <template v-if="filteredList.length > 0">
         <section class="filtered-list pt-5">
           <div class="container">
@@ -227,30 +235,40 @@ export default {
             </div>
 
             <!-- <nav class="d-flex justify-content-center pt-5" aria-label="Page navigation">
-                <ul class="pagination">
-                  <li class="page-item" v-if="filteredList.prev_page_url" @click="prevPage(filteredList.prev_page_url)">
-                    <a class="page-link" aria-label="Previous">
-                      <span aria-hidden="true">&laquo;</span>
-                    </a>
-                  </li>
-                  <li class="page-item active" aria-current="page">
-                    <a href="#" class="page-link">{{
-                      filteredList.current_page
-                    }}</a>
-                  </li>
-                  <li class="page-item" v-if="filteredList.next_page_url" @click="nextPage(filteredList.next_page_url)">
-                    <a class="page-link" aria-label="Next">
-                      <span aria-hidden="true">&raquo;</span>
-                    </a>
-                  </li>
-                </ul>
-              </nav> -->
+                                                                                        <ul class="pagination">
+                                                                                          <li class="page-item" v-if="filteredList.prev_page_url" @click="prevPage(filteredList.prev_page_url)">
+                                                                                            <a class="page-link" aria-label="Previous">
+                                                                                              <span aria-hidden="true">&laquo;</span>
+                                                                                            </a>
+                                                                                          </li>
+                                                                                          <li class="page-item active" aria-current="page">
+                                                                                            <a href="#" class="page-link">{{
+                                                                                              filteredList.current_page
+                                                                                            }}</a>
+                                                                                          </li>
+                                                                                          <li class="page-item" v-if="filteredList.next_page_url" @click="nextPage(filteredList.next_page_url)">
+                                                                                            <a class="page-link" aria-label="Next">
+                                                                                              <span aria-hidden="true">&raquo;</span>
+                                                                                            </a>
+                                                                                          </li>
+                                                                                        </ul>
+                                                                                      </nav> -->
           </div>
         </section>
       </template>
+      <template v-else-if="loading">
+        <div class="loading py-5 w-100 text-center">
+          <div class="loader py-5">
+            <img src="/images/loader.gif" class="img-fluid rounded-circle mb-4" style="max-height: 400px" alt="" />
+          </div>
+        </div>
+      </template>
       <template v-else-if="filteredList.length == 0">
-        <!-- TODO -->
-        <p>No results</p>
+        <div class="loading-fail py-5 mb-4 w-100 text-center">
+          <div class="no-file py-5" style="height: 500px">
+            <h1>No matches found!</h1>
+          </div>
+        </div>
       </template>
     </div>
     <div v-else>
@@ -260,4 +278,71 @@ export default {
   <AppFooter></AppFooter>
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.button2 {
+  display: inline-block;
+  transition: all 0.2s ease-in;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  color: #090909;
+  padding: 6px 20px;
+  font-size: 18px;
+  border-radius: 0.5em;
+  background: #e8e8e8;
+  border: 1px solid #e8e8e8;
+}
+
+.button2:active {
+  color: #666;
+  box-shadow: inset 4px 4px 12px #c5c5c5,
+    inset -4px -4px 12px #ffffff;
+}
+
+.button2:before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%) scaleY(1) scaleX(1.25);
+  top: 100%;
+  width: 140%;
+  height: 180%;
+  background-color: rgba(0, 0, 0, 0.05);
+  border-radius: 50%;
+  display: block;
+  transition: all 0.5s 0.1s cubic-bezier(0.55, 0, 0.1, 1);
+  z-index: -1;
+}
+
+.button2:after {
+  content: "";
+  position: absolute;
+  left: 55%;
+  transform: translateX(-50%) scaleY(1) scaleX(1.45);
+  top: 180%;
+  width: 160%;
+  height: 190%;
+  background-color: #ff8d34;
+  border-radius: 50%;
+  display: block;
+  transition: all 0.5s 0.1s cubic-bezier(0.55, 0, 0.1, 1);
+  z-index: -1;
+}
+
+.button2:hover {
+  color: #ffffff;
+  border: 1px solid #ff8d34;
+}
+
+.button2:hover:before {
+  top: -35%;
+  background-color: #ff8d34;
+  transform: translateX(-50%) scaleY(1.3) scaleX(0.8);
+}
+
+.button2:hover:after {
+  top: -45%;
+  background-color: #ff8d34;
+  transform: translateX(-50%) scaleY(1.3) scaleX(0.8);
+}
+</style>

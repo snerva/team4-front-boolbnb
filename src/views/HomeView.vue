@@ -151,58 +151,51 @@ export default {
       <div class="container">
         <div class="best-properties py-5 text-center">
           <h2 class="mb-3">PROPERTIES TO LOVE</h2>
-
-          <div class="sponsorized-list">
-
-
-
-
-
-            <div class="card text-bg-dark" v-for="sponsored in sponsoredList">
-              <img :src="getImagePath(sponsored.image)" class="card-img" alt="">
-              <div class="card-img-overlay d-flex flex-column justify-content-between p-3">
-                <div class="info-top">
-                  <h4 class="card-title">{{ sponsored.title }}</h4>
-                  <p class="card-text">{{ sponsored.address }}</p>
-                  <h5 class="card-text text-orange">{{ sponsored.price }}</h5>
+          <div class="sponsorized-list d-flex rounded gap-2 mb-5">
+            <div class="card text-bg-dark p-0 border-0" style="max-height: 550px; max-width: 352px"
+              v-for="sponsored in sponsoredList">
+              <router-link :to="{
+                name: 'single-property',
+                params: { slug: sponsored.slug },
+              }">
+                <img :src="getImagePath(sponsored.image)" class="card-img img-fluid" style="object-fit: cover;" alt="">
+                <div class="card-img-overlay d-flex flex-column justify-content-between p-3">
+                  <div class="info-top">
+                    <h4 class="card-title text-white">{{ sponsored.title }}</h4>
+                    <p class="card-text text-white">{{ sponsored.address }}</p>
+                    <h5 class="card-text text-orange">{{ sponsored.price }}</h5>
+                  </div>
+                  <div class="info-bottom d-flex justify-content-between align-items-center">
+                    <h6 class="text-orange">
+                      <font-awesome-icon icon="fa-solid fa-door-open" />
+                      {{ sponsored.rooms_num }}
+                    </h6>
+                    <h6 class="text-orange">
+                      <font-awesome-icon icon="fa-solid fa-bed" />
+                      {{ sponsored.beds_num }}
+                    </h6>
+                    <h6 class="text-orange">
+                      {{ sponsored.square_meters }} m&sup2;
+                    </h6>
+                  </div>
                 </div>
-                <div class="info-bottom d-flex justify-content-between align-items-center">
-                  <h6 class="text-orange">
-                    <font-awesome-icon icon="fa-solid fa-door-open" />
-                    {{ sponsored.rooms_num }}
-                  </h6>
-                  <h6 class="text-orange">
-                    <font-awesome-icon icon="fa-solid fa-bed" />
-                    {{ sponsored.beds_num }}
-                  </h6>
-                  <h6 class="text-orange">
-                    {{ sponsored.square_meters }} m&sup2;
-                  </h6>
-                </div>
-              </div>
+              </router-link>
             </div>
-
-
-
-
-
           </div>
           <router-link active-class="active" class="btn bck-orange rounded-pill px-3" :to="{ name: 'properties' }">VIEW
             ALL PROPERTIES</router-link>
         </div>
         <!--/.best-properties-->
+      </div>
+    </div>
+    <!--/.info-container-->
+    <div class="parallax_group info-container">
+      <div class="container">
         <div class="search py-5">
           <div class="row row-cols-1 row-cols-md-2">
             <div class="col">
               <div class="search-bar p-3">
                 <h4 class="text-orange mb-3">Search properties near you!</h4>
-                <!-- <input
-                                  type="text"
-                                  placeholder="What's your destination?"
-                                  v-model="addressToSearch"
-                                  class="w-100 mb-3 rounded-pill py-2 px-3"
-                                  @keyup.enter="geocoding"
-                                /> -->
                 <SearchBox ref="search_box" @keyup.enter="geocoding" />
                 <div class="d-flex align-items-center justify-content-around py-1">
                   <SearchInMap class="sticky-top" ref="map" :center="[this.lng, this.lat]"
@@ -210,7 +203,6 @@ export default {
                 </div>
               </div>
             </div>
-
             <div class="col">
               <div class="propertyList d-flex rounded gap-2">
                 <div class="card text-bg-dark p-0 border-0" style="max-height: 550px; max-width: 352px"

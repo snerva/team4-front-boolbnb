@@ -211,10 +211,10 @@ export default {
     <div class="parallax_group search-container">
       <div class="container">
         <div class="search pt-5">
-          <div class="row row-cols-1 row-cols-md-2">
-            <div class="col">
-              <div class="search-bar p-3">
-                <h3 class="text-orange mb-4">Search properties near you!</h3>
+          <div class="row flex-column justify-content-center align-items-center row-cols-1">
+            <h3 class="text-orange text-center mb-4">Search properties near you!</h3>
+            <div class="col-9">
+              <div class="search-bar p-5">
                 <SearchBox ref="search_box" @keyup.enter="geocoding" />
                 <div class="d-flex align-items-center justify-content-around py-1">
                   <SearchInMap class="sticky-top" ref="map" :center="[this.lng, this.lat]"

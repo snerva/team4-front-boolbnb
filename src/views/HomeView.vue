@@ -160,7 +160,7 @@ export default {
                 ALL PROPERTIES <font-awesome-icon icon="fa-solid fa-arrow-right-long" /></router-link>
             </div>
           </div>
-          <div class="sponsorized-list property-list d-flex rounded gap-2 pb-5">
+          <div class="sponsorized-list propertyList d-flex rounded gap-2 pb-5">
             <div class="card text-bg-dark p-0 border-0" style="max-height: 550px; max-width: 352px"
               v-for="sponsored in sponsoredList">
               <router-link :to="{
@@ -210,11 +210,12 @@ export default {
     <!--/.info-container-->
     <div class="parallax_group search-container">
       <div class="container">
+        <a name="search"></a>
         <div class="search">
           <div class="row flex-column justify-content-center align-items-center row-cols-1">
             <h3 class="text-orange text-center mb-4">Search properties near you!</h3>
-            <div class="col-9">
-              <div class="search-bar px-5">
+            <div class="col-md-9">
+              <div class="search-bar px-md-5">
                 <SearchBox ref="search_box" @keyup.enter="geocoding" />
                 <div class="d-flex align-items-center justify-content-around py-1">
                   <SearchInMap class="sticky-top" ref="map" :center="[this.lng, this.lat]"
@@ -223,8 +224,8 @@ export default {
               </div>
             </div>
             <div class="col">
-              <div class="propertyList d-flex rounded gap-2">
-                <div class="card text-bg-dark p-0 border-0" style="max-height: 400px; max-width: 352px"
+              <div class="propertyList d-flex rounded gap-2 pt-5">
+                <div class="card text-bg-dark p-0 border-0" style="max-height: 400px; max-width: 276px"
                   v-for="property in propertiesList">
                   <div class="card-img overflow-hidden rounded">
                     <router-link :to="{
@@ -254,24 +255,20 @@ export default {
                     <h6 class="card-text text-orange">
                       {{ property.price }} &euro;
                     </h6>
-                    <h6 class="card-text text-orange" v-if="property.type">
-                      Type: {{ property.type.name }}
-                    </h6>
-                    <h6 v-else>no types yet</h6>
                   </div>
                 </div>
               </div>
             </div>
           </div>
           <!--/.search-->
-          <a name="search"></a>
+
         </div>
       </div>
     </div>
     <!--/.info-container-->
     <div class="parallax_group review-container">
       <div class="container">
-        <div class="review">
+        <div class="review py-5">
           <div id="carousel" class="carousel slide">
             <div class="carousel-inner">
               <div class="carousel-item active p-5">

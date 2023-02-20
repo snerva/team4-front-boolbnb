@@ -50,7 +50,7 @@ export default {
         )
         .then((res) => {
           console.log(res);
-          this.filteredList = res.data;
+          this.filteredList = res.data.results;
 
           // svuoto array coordinate degli appartamenti trovati
           this.apartmentsCoordinates = [];
@@ -129,13 +129,6 @@ export default {
               <label for="addressToSearch" class="text-orange text-start p-2">
                 <font-awesome-icon icon="fa-solid fa-map-location-dot" />
                 Place</label>
-              <!-- <input
-                                                                        type="text"
-                                                                        placeholder="Where?"
-                                                                        v-model="addressToSearch"
-                                                                        class="border border-0 py-2 px-4 w-100"
-                                                                        @keyup.enter="geocoding()"
-                                                                      /> -->
               <SearchBox ref="search_box" @keyup.enter="geocoding" />
             </div>
             <!--/address-->
@@ -233,25 +226,25 @@ export default {
               </div>
             </div>
 
-            <nav class="d-flex justify-content-center pt-5" aria-label="Page navigation">
-              <ul class="pagination">
-                <li class="page-item" v-if="filteredList.prev_page_url" @click="prevPage(filteredList.prev_page_url)">
-                  <a class="page-link" aria-label="Previous">
-                    <span aria-hidden="true">&laquo;</span>
-                  </a>
-                </li>
-                <li class="page-item active" aria-current="page">
-                  <a href="#" class="page-link">{{
-                    filteredList.current_page
-                  }}</a>
-                </li>
-                <li class="page-item" v-if="filteredList.next_page_url" @click="nextPage(filteredList.next_page_url)">
-                  <a class="page-link" aria-label="Next">
-                    <span aria-hidden="true">&raquo;</span>
-                  </a>
-                </li>
-              </ul>
-            </nav>
+            <!-- <nav class="d-flex justify-content-center pt-5" aria-label="Page navigation">
+                <ul class="pagination">
+                  <li class="page-item" v-if="filteredList.prev_page_url" @click="prevPage(filteredList.prev_page_url)">
+                    <a class="page-link" aria-label="Previous">
+                      <span aria-hidden="true">&laquo;</span>
+                    </a>
+                  </li>
+                  <li class="page-item active" aria-current="page">
+                    <a href="#" class="page-link">{{
+                      filteredList.current_page
+                    }}</a>
+                  </li>
+                  <li class="page-item" v-if="filteredList.next_page_url" @click="nextPage(filteredList.next_page_url)">
+                    <a class="page-link" aria-label="Next">
+                      <span aria-hidden="true">&raquo;</span>
+                    </a>
+                  </li>
+                </ul>
+              </nav> -->
           </div>
         </section>
       </template>

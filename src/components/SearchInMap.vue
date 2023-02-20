@@ -25,7 +25,7 @@ export default {
         key: this.apiKey,
         container: "map",
         center: this.center,
-        zoom: 12,
+        zoom: 3,
         language: "it-IT",
       });
 

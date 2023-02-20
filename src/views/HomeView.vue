@@ -19,8 +19,8 @@ export default {
       radius: 20000, // raggio ricerca
       propertiesList: [],
       propertiesCoordinates: [],
-      lng: "",
-      lat: "",
+      lng: "9.238072",
+      lat: "48.786346",
       sponsoredList: [],
     };
   },
@@ -149,53 +149,72 @@ export default {
     <!--/.hero-container-->
     <div class="parallax_group info-container">
       <div class="container">
-        <div class="best-properties py-5 text-center">
-          <h2 class="mb-3">PROPERTIES TO LOVE</h2>
-          <div class="sponsorized-list d-flex rounded gap-2 mb-5">
+        <div class="best-properties pt-5">
+          <div class="best-headers d-flex justify-content-between align-items-end py-5">
+            <div class="title">
+              <h2 class="text-orange">PROPERTIES TO LOVE</h2>
+            </div>
+            <div class="link">
+              <router-link active-class="active" class="btn bck-orange rounded-pill px-3"
+                :to="{ name: 'properties' }">VIEW
+                ALL PROPERTIES <font-awesome-icon icon="fa-solid fa-arrow-right-long" /></router-link>
+            </div>
+          </div>
+          <div class="sponsorized-list property-list d-flex rounded gap-2 pb-5">
             <div class="card text-bg-dark p-0 border-0" style="max-height: 550px; max-width: 352px"
               v-for="sponsored in sponsoredList">
               <router-link :to="{
                 name: 'single-property',
                 params: { slug: sponsored.slug },
               }">
-                <img :src="getImagePath(sponsored.image)" class="card-img img-fluid" style="object-fit: cover;" alt="">
-                <div class="card-img-overlay d-flex flex-column justify-content-between p-3">
-                  <div class="info-top">
-                    <h4 class="card-title text-white">{{ sponsored.title }}</h4>
-                    <p class="card-text text-white">{{ sponsored.address }}</p>
-                    <h5 class="card-text text-orange">{{ sponsored.price }}</h5>
-                  </div>
-                  <div class="info-bottom d-flex justify-content-between align-items-center">
-                    <h6 class="text-orange">
-                      <font-awesome-icon icon="fa-solid fa-door-open" />
-                      {{ sponsored.rooms_num }}
-                    </h6>
-                    <h6 class="text-orange">
-                      <font-awesome-icon icon="fa-solid fa-bed" />
-                      {{ sponsored.beds_num }}
-                    </h6>
-                    <h6 class="text-orange">
-                      {{ sponsored.square_meters }} m&sup2;
-                    </h6>
-                  </div>
+                <div class="card-img overflow-hidden">
+                  <img :src="getImagePath(sponsored.image)" class="card-img photo-zoom img-fluid"
+                    style="object-fit:cover;" alt="">
                 </div>
               </router-link>
+              <div class="card-body d-flex flex-column justify-content-between p-3">
+                <div class="info-top">
+                  <h4 class="card-title text-white">{{ sponsored.title }}</h4>
+                  <p class="card-text text-white">{{ sponsored.address }}</p>
+                </div>
+                <div class="info-bottom d-flex justify-content-between align-items-center pt-4">
+                  <h6 class="text-orange">
+                    <font-awesome-icon icon="fa-solid fa-door-open" />
+                    {{ sponsored.rooms_num }}
+                  </h6>
+                  <h6 class="text-orange">
+                    <font-awesome-icon icon="fa-solid fa-bed" />
+                    {{ sponsored.beds_num }}
+                  </h6>
+                  <h6 class="text-orange">
+                    {{ sponsored.square_meters }} m&sup2;
+                  </h6>
+                  <h6 class="text-orange">{{ sponsored.price }} &euro;</h6>
+                </div>
+              </div>
             </div>
           </div>
-          <router-link active-class="active" class="btn bck-orange rounded-pill px-3" :to="{ name: 'properties' }">VIEW
-            ALL PROPERTIES</router-link>
+
         </div>
         <!--/.best-properties-->
+        <div class="quotes text-center py-5">
+          <blockquote class="blockquote">
+            <h2>"Travel is not really about leaving our homes, but leaving our habits."</h2>
+          </blockquote>
+          <figcaption class="blockquote-footer fs-4">
+            Pico Iyer
+          </figcaption>
+        </div>
       </div>
     </div>
     <!--/.info-container-->
-    <div class="parallax_group info-container">
+    <div class="parallax_group search-container">
       <div class="container">
-        <div class="search py-5">
+        <div class="search pt-5">
           <div class="row row-cols-1 row-cols-md-2">
             <div class="col">
               <div class="search-bar p-3">
-                <h4 class="text-orange mb-3">Search properties near you!</h4>
+                <h3 class="text-orange mb-4">Search properties near you!</h3>
                 <SearchBox ref="search_box" @keyup.enter="geocoding" />
                 <div class="d-flex align-items-center justify-content-around py-1">
                   <SearchInMap class="sticky-top" ref="map" :center="[this.lng, this.lat]"
@@ -250,6 +269,33 @@ export default {
       </div>
     </div>
     <!--/.info-container-->
+    <div class="parallax_group review-container">
+      <div class="container">
+        <div class="review">
+          <div id="carousel" class="carousel slide">
+            <div class="carousel-inner">
+              <div class="carousel-item active p-5">
+                <img src="/images/slider_1.png" class="d-block w-100" alt="...">
+              </div>
+              <div class="carousel-item p-5">
+                <img src="/images/slider_2.png" class="d-block w-100" alt="...">
+              </div>
+              <div class="carousel-item p-5">
+                <img src="/images/slider_3.png" class="d-block w-100" alt="...">
+              </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carousel" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carousel" data-bs-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Next</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
     <AppFooter></AppFooter>
   </div>
 </template>
@@ -270,5 +316,12 @@ export default {
     border-radius: 8px;
     scroll-snap-align: start;
   }
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  width: 3rem !important;
+  height: 3rem !important;
+  color: #ff8d34 !important;
 }
 </style>

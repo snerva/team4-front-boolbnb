@@ -63,7 +63,16 @@
 
 .info-container {
     background-color: #ffffff;
-    transform: translateZ(0) scale(1);
+    z-index: 1;
+}
+
+.search-container {
+    background-color: #ffffff;
+    z-index: 1;
+}
+
+.review-container {
+    background-color: #ffffff;
     z-index: 1;
 }
 

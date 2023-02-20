@@ -224,7 +224,7 @@ export default {
               </div>
             </div>
             <div class="col">
-              <div class="propertyList d-flex rounded gap-2 pt-5">
+              <div class="propertyList d-flex rounded gap-2 pt-4">
                 <div class="card text-bg-dark p-0 border-0" style="max-height: 400px; max-width: 276px"
                   v-for="property in propertiesList">
                   <div class="card-img overflow-hidden rounded">

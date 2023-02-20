@@ -210,11 +210,11 @@ export default {
     <!--/.info-container-->
     <div class="parallax_group search-container">
       <div class="container">
-        <div class="search pt-5">
+        <div class="search">
           <div class="row flex-column justify-content-center align-items-center row-cols-1">
             <h3 class="text-orange text-center mb-4">Search properties near you!</h3>
             <div class="col-9">
-              <div class="search-bar p-5">
+              <div class="search-bar px-5">
                 <SearchBox ref="search_box" @keyup.enter="geocoding" />
                 <div class="d-flex align-items-center justify-content-around py-1">
                   <SearchInMap class="sticky-top" ref="map" :center="[this.lng, this.lat]"
@@ -224,7 +224,7 @@ export default {
             </div>
             <div class="col">
               <div class="propertyList d-flex rounded gap-2">
-                <div class="card text-bg-dark p-0 border-0" style="max-height: 550px; max-width: 352px"
+                <div class="card text-bg-dark p-0 border-0" style="max-height: 400px; max-width: 352px"
                   v-for="property in propertiesList">
                   <div class="card-img overflow-hidden rounded">
                     <router-link :to="{

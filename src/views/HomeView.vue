@@ -159,7 +159,7 @@ export default {
             </div>
           </div>
           <div class="sponsorized-list propertyList d-flex rounded gap-2">
-            <div class="card text-bg-dark p-0 border-0" style="max-height: 450px; max-width: 266px"
+            <div class="card text-bg-dark p-0 border-0" style="max-height: 500px; max-width: 266px"
               v-for="sponsored in sponsoredList">
               <router-link :to="{
                 name: 'single-property',

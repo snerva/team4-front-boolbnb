@@ -53,6 +53,9 @@ export default {
         )
         .then((res) => {
           console.log(res);
+          this.filteredList = [];
+          this.hasSponsorship = [];
+          this.hasNoSponsorship = [];
           this.filteredList = res.data.results;
           console.log(this.filteredList);
           this.loading = false;

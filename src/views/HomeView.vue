@@ -126,7 +126,7 @@ export default {
                     PROPERTIES</router-link>
                 </li>
                 <li class="nav-item pe-3">
-                  <a class="nav-link" href="http://127.0.0.1:8000/">SELL</a>
+                  <a class="nav-link" active-class="active" href="http://127.0.0.1:8000/">SELL</a>
                 </li>
                 <li class="nav-item pe-3">
                   <router-link active-class="active" class="nav-link" :to="{ name: 'about' }">ABOUT US</router-link>

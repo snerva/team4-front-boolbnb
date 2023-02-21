@@ -125,9 +125,9 @@ export default {
 
 <template>
   <AppHeader></AppHeader>
-  <main>
-    <div class="banner search-properties p-5">
-      <div class="container">
+<main>
+  <div class="banner search-properties p-5">
+    <div class="container">
         <div class="search-bar text-center py-5">
           <div class="input-group d-flex align-items-end justify-content-center bg-dark bg-opacity-75 rounded pb-5 pt-2">
             <div class="search-address d-flex flex-column">
@@ -193,7 +193,7 @@ export default {
       <template v-if="filteredList.length > 0">
         <section class="filtered-list pt-5">
           <div class="container">
-            <div class="row row-cols-1 row-cols-md-4 g-4 mb-4">
+            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4 mb-4">
               <div class="col" v-for="property in filteredList">
                 <div class="card text-bg-dark border-0" style="height: 100%">
                   <div class="image overflow-hidden rounded">
@@ -235,24 +235,24 @@ export default {
             </div>
 
             <!-- <nav class="d-flex justify-content-center pt-5" aria-label="Page navigation">
-                                                                                                        <ul class="pagination">
-                                                                                                          <li class="page-item" v-if="filteredList.prev_page_url" @click="prevPage(filteredList.prev_page_url)">
-                                                                                                            <a class="page-link" aria-label="Previous">
-                                                                                                              <span aria-hidden="true">&laquo;</span>
-                                                                                                            </a>
-                                                                                                          </li>
-                                                                                                          <li class="page-item active" aria-current="page">
-                                                                                                            <a href="#" class="page-link">{{
-                                                                                                              filteredList.current_page
-                                                                                                            }}</a>
-                                                                                                          </li>
-                                                                                                          <li class="page-item" v-if="filteredList.next_page_url" @click="nextPage(filteredList.next_page_url)">
-                                                                                                            <a class="page-link" aria-label="Next">
-                                                                                                              <span aria-hidden="true">&raquo;</span>
-                                                                                                            </a>
-                                                                                                          </li>
-                                                                                                        </ul>
-                                                                                                      </nav> -->
+                                                                                                          <ul class="pagination">
+                                                                                                            <li class="page-item" v-if="filteredList.prev_page_url" @click="prevPage(filteredList.prev_page_url)">
+                                                                                                              <a class="page-link" aria-label="Previous">
+                                                                                                                <span aria-hidden="true">&laquo;</span>
+                                                                                                              </a>
+                                                                                                            </li>
+                                                                                                            <li class="page-item active" aria-current="page">
+                                                                                                              <a href="#" class="page-link">{{
+                                                                                                                filteredList.current_page
+                                                                                                              }}</a>
+                                                                                                            </li>
+                                                                                                            <li class="page-item" v-if="filteredList.next_page_url" @click="nextPage(filteredList.next_page_url)">
+                                                                                                              <a class="page-link" aria-label="Next">
+                                                                                                                <span aria-hidden="true">&raquo;</span>
+                                                                                                              </a>
+                                                                                                            </li>
+                                                                                                          </ul>
+                                                                                                        </nav> -->
           </div>
         </section>
       </template>

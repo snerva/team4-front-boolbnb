@@ -53,7 +53,7 @@ export default {
   <section class="vue-home pt-5">
     <div class="container">
       <template v-if="properties && !loading">
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4 mb-4">
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4 mb-4">
           <div class="col" v-for="property in properties.data">
             <div class="card text-bg-dark border-0" style="height: 100%">
               <div class="image overflow-hidden rounded">

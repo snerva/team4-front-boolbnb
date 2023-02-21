@@ -21,7 +21,7 @@ export default {
                     </li>
                     <li class="text-center">
                         <h5 class="text-orange">RESOURCES</h5>
-                        <a class="nav-link" href="http://127.0.0.1:8000/">OWNER'S PORTAL</a>
+                        <a class="nav-link active" href="http://127.0.0.1:8000/">OWNER'S PORTAL</a>
                     </li>
                 </ul>
             </div>

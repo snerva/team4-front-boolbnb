@@ -50,7 +50,7 @@
 .city {
     background: url('/images/city.png') no-repeat center;
     background-size: cover;
-    transform: translateZ(-250px) scale(1.833333333);
+
     z-index: 3;
 }
 
@@ -67,6 +67,7 @@
 }
 
 .search-container {
+    height: auto;
     background-color: #ffffff;
     z-index: 1;
 }
@@ -78,6 +79,10 @@
 
 
 @media (min-width: 576px) {
+
+    .city {
+        transform: translateZ(-250px) scale(1.833333333);
+    }
 
     .hero-text {
         h1 {
@@ -92,6 +97,10 @@
         h1 {
             font-size: 112px !important;
         }
+    }
+
+    .search-container {
+        height: 100vh;
     }
 }
 

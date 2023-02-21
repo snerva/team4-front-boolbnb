@@ -152,14 +152,14 @@ export default {
     <!--/.hero-container-->
     <div class="parallax_group info-container">
       <div class="container">
-        <div class="best-properties pt-5">
+        <div class="best-properties pt-md-5">
           <div class="best-headers d-flex justify-content-between align-items-end py-5">
             <div class="title">
               <h2 class="text-orange">PROPERTIES TO LOVE</h2>
             </div>
           </div>
           <div class="sponsorized-list propertyList d-flex rounded gap-2">
-            <div class="card text-bg-dark p-0 border-0" style="max-height: 550px; max-width: 352px"
+            <div class="card text-bg-dark p-0 border-0" style="max-height: 450px; max-width: 266px"
               v-for="sponsored in sponsoredList">
               <router-link :to="{
                 name: 'single-property',
@@ -192,7 +192,7 @@ export default {
               </div>
             </div>
           </div>
-          <div class="link text-center py-5">
+          <div class="link text-center pt-4 py-md-5">
             <router-link active-class="active" class="btn bck-orange rounded-pill px-3" :to="{ name: 'properties' }">VIEW
               ALL PROPERTIES <font-awesome-icon icon="fa-solid fa-arrow-right-long" /></router-link>
           </div>
@@ -207,7 +207,7 @@ export default {
         <a name="search"></a>
         <div class="search">
           <div class="row flex-column justify-content-center align-items-center row-cols-1">
-            <h3 class="text-orange text-center mb-4">Search properties near you!</h3>
+            <h3 class="text-orange text-center my-4">Search properties near you!</h3>
             <div class="col-md-9">
               <div class="search-bar px-md-5">
                 <SearchBox ref="search_box" @keyup.enter="geocoding" />
@@ -218,7 +218,7 @@ export default {
               </div>
             </div>
             <div class="col">
-              <div class="propertyList d-flex rounded gap-2 pt-4">
+              <div class="propertyList d-flex rounded gap-2 py-4">
                 <div class="card text-bg-dark p-0 border-0" style="max-height: 400px; max-width: 276px"
                   v-for="property in propertiesList">
                   <div class="card-img overflow-hidden rounded">
@@ -314,6 +314,11 @@ export default {
     padding: 1rem;
     border-radius: 8px;
     scroll-snap-align: start;
+
+    @media (min-width: 576px) {
+      max-height: 550px;
+      max-width: 352px;
+    }
   }
 }
 

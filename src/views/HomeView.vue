@@ -208,12 +208,10 @@ export default {
         <div class="search">
           <div class="row flex-column justify-content-center align-items-center row-cols-1">
             <h3 class="text-orange text-center my-4">Search properties near you!</h3>
-            <div class="col">
-              <div class="search-bar d-flex flex-md-row px-md-5">
-                <div class="col p-1">
-                  <SearchBox ref="search_box" @keyup.enter="geocoding" />
-                </div>
-                <div class="col d-flex align-items-center justify-content-around p-1">
+            <div class="col-md-9">
+              <div class="search-bar px-md-5">
+                <SearchBox ref="search_box" @keyup.enter="geocoding" />
+                <div class="d-flex align-items-center justify-content-around p-1" style="z-index:9 !important">
                   <SearchInMap class="sticky-top" ref="map" :center="[this.lng, this.lat]"
                     :propertiesFound="this.propertiesCoordinates" />
                 </div>
@@ -304,6 +302,7 @@ export default {
 <style lang="scss" scoped>
 #map {
   height: 400px;
+  z-index: 9 !important;
 }
 
 .propertyList {

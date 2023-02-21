@@ -207,7 +207,7 @@ export default {
         <a name="search"></a>
         <div class="search">
           <div class="row flex-column justify-content-center align-items-center row-cols-1">
-            <h3 class="text-orange text-center my-4">Search properties near you!</h3>
+            <h3 class="text-orange text-center mb-4">Search properties near you!</h3>
             <div class="col-md-9">
               <div class="search-bar px-md-5">
                 <SearchBox ref="search_box" @keyup.enter="geocoding" />

@@ -213,6 +213,7 @@ export default {
               <label for="submit" class="pt-5"></label>
               <button name="submit" type="submit" class="button2 rounded-pill" @click="geocoding">Search</button>
             </div>
+            <small class="text-white pt-3">*Please insert address and one amenity al least</small>
           </div>
         </div>
       </div>

@@ -24,6 +24,8 @@ export default {
       amenities: [],
       amenitiesList: [],
       loading: true,
+      hasSponsorship: [],
+      hasNoSponsorship: [],
     };
   },
   methods: {
@@ -52,7 +54,17 @@ export default {
         .then((res) => {
           console.log(res);
           this.filteredList = res.data.results;
+          console.log(this.filteredList);
           this.loading = false;
+
+          for (let i = 0; i < this.filteredList.length; i++) {
+            let property = this.filteredList[i];
+            if (property.sponsorships.length > 0) {
+              this.hasSponsorship.push(property);
+            } else {
+              this.hasNoSponsorship.push(property);
+            }
+          }
 
           // svuoto array coordinate degli appartamenti trovati
           this.apartmentsCoordinates = [];
@@ -65,20 +77,31 @@ export default {
           this.loading = false;
         });
     },
-    getProperties(url) {
-      axios
-        .get(url)
-        .then((response) => {
-          //console.log(response.data.results);
-          this.properties = response.data.results;
-          this.loading = false;
-        })
-        .catch((error) => {
-          console.log(error.message);
-          this.error = error.message;
-          this.loading = false;
-        });
-    },
+    // getProperties(url) {
+    //   axios
+    //     .get(url)
+    //     .then((response) => {
+    //       console.log(response.data);
+    //       this.properties = response.data.results;
+    //       console.log(this.properties);
+    //       this.loading = false;
+    //       for (let i = 0; i < this.properties.length; i++) {
+    //         let property = this.properties[i];
+    //         if (property.sponsorships.length > 0) {
+    //           this.hasSponsorship.push(property);
+    //         } else {
+    //           this.hasNoSponsorship.push(property);
+    //         }
+    //       }
+    //       console.log(this.hasSponsorship);
+    //       console.log(this.hasNoSponsorship);
+    //     })
+    //     .catch((error) => {
+    //       console.log(error.message);
+    //       this.error = error.message;
+    //       this.loading = false;
+    //     });
+    // },
     getAmenities(url) {
       axios
         .get(url)
@@ -117,7 +140,7 @@ export default {
     },
   },
   mounted() {
-    this.getProperties(this.state.api_url + "/api/properties");
+    // this.getProperties(this.state.api_url + "/api/properties");
     this.getAmenities(this.state.api_url + "/api/amenities");
   },
 };
@@ -125,9 +148,9 @@ export default {
 
 <template>
   <AppHeader></AppHeader>
-<main>
-  <div class="banner search-properties p-5">
-    <div class="container">
+  <main>
+    <div class="banner search-properties p-5">
+      <div class="container">
         <div class="search-bar text-center py-5">
           <div class="input-group d-flex align-items-end justify-content-center bg-dark bg-opacity-75 rounded pb-5 pt-2">
             <div class="search-address d-flex flex-column">
@@ -194,7 +217,10 @@ export default {
         <section class="filtered-list pt-5">
           <div class="container">
             <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4 mb-4">
-              <div class="col" v-for="property in filteredList">
+
+
+
+              <div class="col" v-for="property in hasSponsorship">
                 <div class="card text-bg-dark border-0" style="height: 100%">
                   <div class="image overflow-hidden rounded">
                     <router-link :to="{
@@ -205,54 +231,71 @@ export default {
                     </router-link>
                   </div>
                   <div class="card-body">
-                    <div class="icons d-flex justify-content-between mb-3">
-                      <h6 class="text-orange">
+                    <div class="icons d-flex justify-content-between mb-2">
+                      <h5 class="text-orange">
                         <font-awesome-icon icon="fa-solid fa-door-open" />
                         {{ property.rooms_num }}
-                      </h6>
-                      <h6 class="text-orange">
+                      </h5>
+                      <h5 class="text-orange">
                         <font-awesome-icon icon="fa-solid fa-bed" />
                         {{ property.beds_num }}
-                      </h6>
-                      <h6 class="text-orange">
+                      </h5>
+                      <h5 class="text-orange">
                         {{ property.square_meters }} m&sup2
-                      </h6>
+                      </h5>
                     </div>
                     <h4 class="card-title">{{ property.title }}</h4>
                     <p class="card-text">{{ property.address }}</p>
-                    <p class="card-text text-orange">
-                      {{ property.price }} &euro;
-                    </p>
+                    <h4 class="card-text text-orange">{{ property.price }} &euro;</h4>
                     <div class="type my-3">
                       <strong class="text-orange" v-if="property.type">
-                        {{ property.type.name }}
+                        Type: {{ property.type.name }}
                       </strong>
                       <span v-else></span>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
 
-            <!-- <nav class="d-flex justify-content-center pt-5" aria-label="Page navigation">
-                                                                                                          <ul class="pagination">
-                                                                                                            <li class="page-item" v-if="filteredList.prev_page_url" @click="prevPage(filteredList.prev_page_url)">
-                                                                                                              <a class="page-link" aria-label="Previous">
-                                                                                                                <span aria-hidden="true">&laquo;</span>
-                                                                                                              </a>
-                                                                                                            </li>
-                                                                                                            <li class="page-item active" aria-current="page">
-                                                                                                              <a href="#" class="page-link">{{
-                                                                                                                filteredList.current_page
-                                                                                                              }}</a>
-                                                                                                            </li>
-                                                                                                            <li class="page-item" v-if="filteredList.next_page_url" @click="nextPage(filteredList.next_page_url)">
-                                                                                                              <a class="page-link" aria-label="Next">
-                                                                                                                <span aria-hidden="true">&raquo;</span>
-                                                                                                              </a>
-                                                                                                            </li>
-                                                                                                          </ul>
-                                                                                                        </nav> -->
+              <div class="col" v-for="property in hasNoSponsorship">
+                <div class="card text-bg-dark border-0" style="height: 100%">
+                  <div class="image overflow-hidden rounded">
+                    <router-link :to="{
+                      name: 'single-property',
+                      params: { slug: property.slug },
+                    }">
+                      <img class="img-fluid photo-zoom card-image" :src="getImagePath(property.image)" alt="" />
+                    </router-link>
+                  </div>
+                  <div class="card-body">
+                    <div class="icons d-flex justify-content-between mb-2">
+                      <h5 class="text-orange">
+                        <font-awesome-icon icon="fa-solid fa-door-open" />
+                        {{ property.rooms_num }}
+                      </h5>
+                      <h5 class="text-orange">
+                        <font-awesome-icon icon="fa-solid fa-bed" />
+                        {{ property.beds_num }}
+                      </h5>
+                      <h5 class="text-orange">
+                        {{ property.square_meters }} m&sup2
+                      </h5>
+                    </div>
+                    <h4 class="card-title">{{ property.title }}</h4>
+                    <p class="card-text">{{ property.address }}</p>
+                    <h4 class="card-text text-orange">{{ property.price }} &euro;</h4>
+                    <div class="type my-3">
+                      <strong class="text-orange" v-if="property.type">
+                        Type: {{ property.type.name }}
+                      </strong>
+                      <span v-else></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+            </div>
           </div>
         </section>
       </template>

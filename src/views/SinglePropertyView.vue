@@ -92,7 +92,7 @@ export default {
   <main>
     <div class="container">
       <template class="single-project" v-if="property">
-        <section class="single-property top p-5 mb-4">
+        <section class="single-property top p-3 p-md-5 mb-4">
           <div class="row row-cols-1 row-cols-md-2">
             <div class="col d-flex justify-content-center align-items-center">
               <div class="property_title text-center px-3">
@@ -115,10 +115,10 @@ export default {
             </div>
           </div>
         </section>
-        <section class="single-property bottom p-5">
+        <section class="single-property bottom p-md-5">
           <div class="row row-cols-1 row-cols-md-2">
             <div class="col">
-              <div class="property-info text-center p-5">
+              <div class="property-info text-center p-3 p-md-5">
                 <div class="info d-flex justify-content-around mb-4">
                   <h3 class="text-orange">
                     <font-awesome-icon icon="fa-solid fa-door-open" />
@@ -164,7 +164,7 @@ export default {
               </div>
             </div>
             <div class="col">
-              <div class="contact text-center p-5">
+              <div class="contact text-center p-3 p-md-5">
                 <div v-if="success" class="alert alert-success text-start" role="alert">
                   Message sent successfully!
                 </div>

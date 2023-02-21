@@ -21,8 +21,7 @@ export default {
                     </li>
                     <li class="text-center">
                         <h5 class="text-orange">RESOURCES</h5>
-                        <router-link active-class="active" class="nav-link" :to="{ name: 'home' }">OWNER'S
-                            PORTAL</router-link>
+                        <a class="nav-link" href="http://127.0.0.1:8000/">OWNER'S PORTAL</a>
                     </li>
                 </ul>
             </div>
@@ -45,6 +44,4 @@ export default {
     </footer>
 </template>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>

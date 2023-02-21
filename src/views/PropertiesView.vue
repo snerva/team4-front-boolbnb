@@ -66,13 +66,16 @@ export default {
               this.hasSponsorship.push(property);
             } else {
               this.hasNoSponsorship.push(property);
+
             }
           }
+          //console.log(this.hasSponsorship);
+          //console.log(this.hasNoSponsorship);
 
           // svuoto array coordinate degli appartamenti trovati
           this.apartmentsCoordinates = [];
 
-          console.log(this.filteredList);
+          //console.log(this.filteredList);
         })
         .catch((err) => {
           console.error(err)
